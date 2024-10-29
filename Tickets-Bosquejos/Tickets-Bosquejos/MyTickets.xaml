@@ -40,6 +40,8 @@
                 <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\update.png" Height="25"></Image>
             </Button>
 
+            <TextBlock Text="Tickets" Width="80" Height="25" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" DockPanel.Dock="Left" 
+    Margin="12,0,0,8"></TextBlock>
         </DockPanel>
 
         <StackPanel Grid.Row="1">
