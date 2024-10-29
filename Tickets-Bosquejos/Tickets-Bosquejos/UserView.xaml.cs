@@ -34,5 +34,18 @@ namespace Tickets_Bosquejos
             MainFrame.Navigate(new MyTickets());
 
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Estas seguro de cerrar la sesión?", "Cerrar Sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+
+                MainWindow loginWindow = new MainWindow();
+                loginWindow.Show();
+                this.Close();
+            }
+        }
     }
 }

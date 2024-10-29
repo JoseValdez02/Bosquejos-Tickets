@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tickets_Bosquejos"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="850">
+        Title="Login" Height="450" Width="850"
+        WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -64,7 +65,7 @@
 
                 <!-- Button -->
                 <Button Name="btnLogin" Content="INGRESAR" Width="150" Height="40" Background="#8B3F3C" Foreground="White"
-                 FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+                 FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,0" HorizontalAlignment="Center" Click="btnLogin_Click"/>
             </StackPanel>
         </Border>
     </Grid>
