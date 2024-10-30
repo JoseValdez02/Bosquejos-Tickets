@@ -60,5 +60,11 @@ namespace Tickets_Bosquejos
         {
             cmbFiltrarStatus.SelectedIndex = 0;
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Window.GetWindow(this).Title = "Mis Tickets";
+        }
     }
 }

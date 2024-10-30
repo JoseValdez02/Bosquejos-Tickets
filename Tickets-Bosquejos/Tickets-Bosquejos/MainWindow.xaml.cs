@@ -29,7 +29,7 @@ namespace Tickets_Bosquejos
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string usuario = txtUsuario.Text;
-            string password = txtPassword.Password; // Obtener contraseña del PasswordBox
+            string password = txtPassword.Password; 
 
             // Cadena de conexión a la base de datos MySQL
             string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
@@ -38,55 +38,80 @@ namespace Tickets_Bosquejos
             {
                 try
                 {
+
                     connection.Open();
 
-                    // Consulta para verificar si el usuario y contraseña son válidos
-                    string query = "SELECT usu_puesto FROM liccatusuarios WHERE usu_identificacion = @usuario AND usu_password = @password";
+                    string query = @"SELECT u.usu_puesto, u.emp_clave, u.usu_nombre, e.emp_nombre 
+                             FROM liccatusuarios u 
+                             JOIN liccatempresas e ON u.emp_clave = e.emp_clave 
+                             WHERE u.usu_identificacion = @usuario AND u.usu_password = @password";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@usuario", usuario);
                     cmd.Parameters.AddWithValue("@password", password);
 
-                    // Ejecutar la consulta
-                    object result = cmd.ExecuteScalar();
-
-                    if (result != null)
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        // Si se encuentra el usuario, obtener el rol
-                        string posicion = result.ToString();
-
-                        string actualizarFecha = "UPDATE liccatusuarios SET usu_fecha = @fecha WHERE usu_identificacion = @usuario";
-                        MySqlCommand updateCmd = new MySqlCommand(actualizarFecha, connection);
-                        updateCmd.Parameters.AddWithValue("@fecha", DateTime.Now);
-                        updateCmd.Parameters.AddWithValue("@usuario", usuario);
-                        updateCmd.ExecuteNonQuery();
-
-                        if (posicion == "soporte")
+                        if (reader.Read())
                         {
-                            // Si es administrador, abrir la vista de Admin
-                            AdminView adminView = new AdminView();
-                            adminView.Show();
+                            string puesto = reader["usu_puesto"].ToString();
+                            int empClave = Convert.ToInt32(reader["emp_clave"]);
+                            string nombreUsuario = reader["usu_nombre"].ToString();
+                            string nombreEmpresa = reader["emp_nombre"].ToString();
+
+                            reader.Close();
+
+                            //Actualizar fecha de inicio de sesión de los usuarios
+                            string actualizarFechaUsuarios = "UPDATE liccatusuarios SET usu_fecha = NOW() WHERE usu_identificacion = @usuario";
+                            MySqlCommand updateUserCmd = new MySqlCommand(actualizarFechaUsuarios, connection);
+                            updateUserCmd.Parameters.AddWithValue("@usuario", usuario);
+                            updateUserCmd.ExecuteNonQuery();
+
+                            //Actualizar fecha de inicio de sesión de las empresas
+                            string actualizarFechaEmpresas = "UPDATE liccatempresas SET usu_fecha = NOW() WHERE emp_clave = @empClave";
+                            MySqlCommand updateEmpresaCmd = new MySqlCommand(actualizarFechaEmpresas, connection);
+                            updateEmpresaCmd.Parameters.AddWithValue("@empClave", empClave);
+                            updateEmpresaCmd.ExecuteNonQuery();
+
+                            //Actualizar quien fue el ultimo usuario de la empresa en ingresar a la empresa
+                            string actualizarEmpresaUsuario = "UPDATE liccatempresas SET usu_identificacion = @usuario WHERE emp_clave = @empClave";
+                            MySqlCommand updateEmpresaUsuarioCmd = new MySqlCommand(actualizarEmpresaUsuario, connection);
+                            updateEmpresaUsuarioCmd.Parameters.AddWithValue("@usuario", usuario);
+                            updateEmpresaUsuarioCmd.Parameters.AddWithValue("@empClave", empClave);
+                            updateEmpresaUsuarioCmd.ExecuteNonQuery();
+
+
+                            if (puesto == "soporte")
+                            {
+                                //Si el usuario es de soporte, ingresa a la vista de administrador
+                                AdminView adminView = new AdminView();
+                                adminView.SetUserInfo(nombreUsuario, nombreEmpresa);
+                                adminView.Show();
+                            }
+                            else
+                            {
+                                //Si el usuario es de cualquier otra area, ingresa como usuario
+                                UserView userView = new UserView();
+                                userView.SetUserInfo(nombreUsuario, nombreEmpresa);
+                                userView.Show();
+                            }
+
+                            this.Close();
                         }
                         else
                         {
-                            // Si es usuario normal, abrir la vista de Usuario
-                            UserView userView = new UserView();
-                            userView.Show();
+                            MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-
-                        // Cerrar la ventana de login
-                        this.Close();
-                    }
-                    else
-                    {
-                        // Mostrar mensaje de error si las credenciales son incorrectas
-                        MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error al conectar con la base de datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
             }
         }
     }
 }
+        
+    
+

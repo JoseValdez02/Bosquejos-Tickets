@@ -33,5 +33,31 @@ namespace Tickets_Bosquejos
 
             NavigationService.Navigate(ticketsAdmin);
         }
+
+        private void cmbResponsable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbResponsable.SelectedItem != null && cmbResponsable.SelectedItem is ComboBoxItem selectedItem)
+            {
+                if (!selectedItem.IsEnabled)
+                {
+
+                    cmbResponsable.Text = "Filtrar por Status";
+                }
+                else
+                {
+                    cmbResponsable.Text = selectedItem.Content.ToString();
+                }
+            }
+        }
+
+        private void cmbResponsable_Loaded(object sender, RoutedEventArgs e)
+        {
+            cmbResponsable.SelectedIndex = 0;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Title = "Asignar Responsable";
+        }
     }
 }

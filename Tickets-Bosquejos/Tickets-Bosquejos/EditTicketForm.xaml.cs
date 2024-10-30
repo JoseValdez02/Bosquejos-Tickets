@@ -25,6 +25,7 @@ namespace Tickets_Bosquejos
             InitializeComponent();
         }
 
+        //Boton de volver
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MyTickets());
@@ -34,6 +35,7 @@ namespace Tickets_Bosquejos
             NavigationService.Navigate(misTickets);
         }
 
+        //Poner placeholder
         private void cmbPrioridad_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbPrioridad.SelectedItem != null && cmbPrioridad.SelectedItem is ComboBoxItem selectedItem)
@@ -54,6 +56,13 @@ namespace Tickets_Bosquejos
             {
                 cmbPrioridad.SelectedIndex = 0;
             }
+
+
+        //Obtener titulo de la pagina
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Title = "Editar Tickets";
         }
+    }
     }
 

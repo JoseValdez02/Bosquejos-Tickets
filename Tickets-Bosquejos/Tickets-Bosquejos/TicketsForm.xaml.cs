@@ -45,5 +45,10 @@ namespace Tickets_Bosquejos
         {
             cmbPrioridad.SelectedIndex = 0;
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Title = "Crear Ticket";
+        }
     }
 }

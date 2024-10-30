@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Tickets_Bosquejos"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MyTickets">
+      Loaded="Page_Loaded"
+      Title="Mis Tickets">
 
     <Grid Background="#f5f5eb">
 

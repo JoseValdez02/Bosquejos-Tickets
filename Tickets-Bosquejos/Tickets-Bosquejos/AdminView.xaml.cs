@@ -38,5 +38,16 @@ namespace Tickets_Bosquejos
                 this.Close();
             }
         }
+
+        //Metodo para obtener el nombre del usuario y la empresa
+        public void SetUserInfo (string nombreUsuario, string nombreEmpresa)
+        {
+            txtBienvenida.Text = $"{nombreUsuario}\n{nombreEmpresa}";
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Title = "Menú";
+        }
     }
 }

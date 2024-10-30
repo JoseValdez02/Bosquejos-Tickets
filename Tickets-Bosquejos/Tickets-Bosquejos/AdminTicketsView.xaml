@@ -54,7 +54,7 @@
                 <DataGrid x:Name="tableTickets" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="833" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Titulo del Ticket"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ticket"></DataGridTextColumn>
                         <DataGridTextColumn Header="Usuario"></DataGridTextColumn>
                         <DataGridTextColumn Header="Sistema"></DataGridTextColumn>
                         <DataGridTextColumn Header="Empresa"></DataGridTextColumn>

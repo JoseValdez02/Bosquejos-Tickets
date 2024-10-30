@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Tickets_Bosquejos"
         mc:Ignorable="d"
         Title="Menú" Height="728" Width="1024"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Manual">
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -15,21 +17,23 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Background="#8B3F3C" Opacity="0.9">
-            <TextBlock Name="txtBienvenida" Text=" " FontSize="20" FontWeight="Bold" Foreground="white" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+        <DockPanel Grid.Row="0" Background="#8B3F3C" Opacity="0.9" LastChildFill="True">
+            <TextBlock x:Name="txtBienvenida" Text=" " TextWrapping="Wrap" Width="250" Height="35" FontSize="12" FontWeight="Bold" Foreground="white" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
             <Button x:Name="btnLogout" Width="25" Height="25" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,10,9,10" BorderBrush="Transparent" Click="btnLogout_Click">
                 <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\logout.png" Height="25"></Image>
             </Button>
         </DockPanel>
 
-      
 
-        <Menu Grid.Row="1" Height="30" Width="1025" VerticalAlignment="Top" Background="#965a5a">
-           <MenuItem Header="Crear Ticket" FontWeight="Light" Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Click="MenuItem_Click"></MenuItem>
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <Menu Height="30" VerticalAlignment="Top" Background="#965a5a">
+           <MenuItem Header="Crear Ticket" FontWeight="Light" Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" Click="MenuItem_Click" ></MenuItem>
            <MenuItem Header="Mis Tickets" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Click="MenuItem_Click_1"></MenuItem>
         </Menu>
-
-        <Frame Grid.Row="2" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#f5f5eb"></Frame>
+        </DockPanel>
+        
+        
+        <Frame Grid.Row="2" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#f5f5eb" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Frame>
 
         
         
