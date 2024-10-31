@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tickets_Bosquejos"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="1280"
       Title="Asignar Responsable"
       Loaded="Page_Loaded">
 
@@ -16,8 +16,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Height="35">
-            <Button x:Name="btnVolver" Width="20" Height="20" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,6,25,6" BorderThickness="1,1,1,1" BorderBrush="#333"
+        <DockPanel Grid.Row="0" Height="58">
+            <Button x:Name="btnVolver" Width="35" Height="35" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,6,25,6" BorderThickness="1,1,1,1" BorderBrush="#333"
                     Click="btnVolver_Click">
                 <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\back.png" Height="25"></Image>
             </Button>
@@ -32,34 +32,34 @@
 
             <!-- Información del Ticket-->
             <Border Grid.Column="0" BorderThickness="1" BorderBrush="#8B3F3C" Padding="15" Margin="0,10,0,0">
-                <ScrollViewer Height="450">
-                    <StackPanel HorizontalAlignment="Center" Width="300" VerticalAlignment="Top">
-                        <TextBlock Text="Información del Ticket" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="#333" Margin="0,8,0,15" />
+                <ScrollViewer Height="550">
+                    <StackPanel HorizontalAlignment="Center" Width="350" VerticalAlignment="Top">
+                        <TextBlock Text="Información del Ticket" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="#333" Margin="0,8,0,15" />
 
-                        <TextBlock Text="Incidencia" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Incidencia" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtIncidencia" Height="25" FontSize="14" Margin="0,5,0,15" HorizontalAlignment="Left" Width="260" BorderBrush="#333" IsReadOnly="True" />
 
-                        <TextBlock Text="Usuario" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Usuario" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtUsuario" Height="25" FontSize="14" Margin="0,5,0,15" HorizontalAlignment="Left" Width="260" BorderBrush="#333" IsReadOnly="True" />
 
-                        <TextBlock Text="Sistema" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Sistema" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtSistema" Height="25" Margin="0,5,0,15" FontSize="14" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True">
                         </TextBox>
 
-                        <TextBlock Text="Empresa" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Empresa" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtEmpresa" Height="25" FontSize="14" Margin="0,5,0,15" HorizontalAlignment="Left" Width="260" BorderBrush="#333" />
 
-                        <TextBlock Text="Prioridad" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Prioridad" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtPrioridad" Height="25" Margin="0,5,0,15" FontSize="14" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True">
                         </TextBox>
 
-                        <TextBlock Text="Observaciones" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Observaciones" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtObservaciones" Height="60" FontSize="14" Margin="0,5,0,15" HorizontalAlignment="Left" Width="260" BorderBrush="#333" TextWrapping="Wrap" AcceptsReturn="True"/>
 
-                        <TextBlock Text="Correo" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Correo" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtCorreo" Height="25" FontSize="14" Margin="0,5,0,15" HorizontalAlignment="Left" Width="260" BorderBrush="#333" />
 
-                        <TextBlock Text="Fecha de creación" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                        <TextBlock Text="Fecha de creación" FontSize="18" FontWeight="Bold" Foreground="#333" />
                         <TextBox Name="txtFechaCreacion" Height="25" FontSize="14" Margin="0,5,0,10" HorizontalAlignment="Left" Width="260" BorderBrush="#333" IsReadOnly="True" />
                     </StackPanel>
                 </ScrollViewer>
@@ -67,21 +67,21 @@
 
             
             <!--Asignar responsable-->
-            <Border Grid.Column="2" BorderThickness="1" BorderBrush="#8B3F3C" Padding="15" Margin="0,10,0,0">
-                <StackPanel HorizontalAlignment="Center" Width="300" VerticalAlignment="Top" Margin="0,50,0,0">
-                    <TextBlock Text="Asignar Responsable" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Foreground="#333" Margin="0,8,0,10" />
-                    <TextBlock Text="Asigne un responsable al ticket y la fecha de resolución (Cambiará el estado del ticket a abierto)" FontSize="12" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,15"/>
+            <Border Grid.Column="2" BorderThickness="1" BorderBrush="#8B3F3C" Margin="0,10,0,0">
+                <StackPanel HorizontalAlignment="Center" Width="350" VerticalAlignment="Top" Margin="0,70,0,0">
+                    <TextBlock Text="Asignar Responsable" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="#333" Margin="0,8,0,10" />
+                    <TextBlock Text="Asigne un responsable al ticket y la fecha de resolución (Cambiará el estado del ticket a abierto)" FontSize="14" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,15"/>
 
-                    <TextBlock Text="Responsable" FontSize="14" FontWeight="Bold" Foreground="#333"/>
-                    <TextBlock Text="Asigne al responsable que se encargara de resolver este ticket" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="Responsable" FontSize="18" FontWeight="Bold" Foreground="#333"/>
+                    <TextBlock Text="Asigne al responsable que se encargara de resolver este ticket" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
                     <ComboBox x:Name="cmbResponsable" Height="25" Margin="0,5,0,15" FontSize="14" Width="260" HorizontalAlignment="Left" BorderBrush="#333" SelectionChanged="cmbResponsable_SelectionChanged"
                               Loaded="cmbResponsable_Loaded">
                         <ComboBoxItem Content="Selecciona a un responsable" IsEnabled="False"/>
                     </ComboBox>
 
-                    <TextBlock Text="Fecha de resolución" FontSize="14" FontWeight="Bold" Foreground="#333" />
+                    <TextBlock Text="Fecha de resolución" FontSize="18" FontWeight="Bold" Foreground="#333" />
                     <TextBlock Text="Ingrese la fecha en la que el ticket quedara resuelto" FontSize="12" HorizontalAlignment="Left"></TextBlock>
-                    <TextBox Name="txtFechaResolucion" Height="25" FontSize="14" Margin="0,5,0,20" HorizontalAlignment="Left" BorderThickness="2" Background="White" BorderBrush="#333" Width="260" />
+                    <DatePicker Name="txtFechaResolucion" Height="25" FontSize="14" Margin="0,5,0,20" HorizontalAlignment="Left" BorderThickness="2" Background="White" BorderBrush="#333" Width="260" />
 
                     <Button Name="btnAsignar" Content="Asignar" Width="150" Height="40" Background="#8B3F3C" Foreground="White"
                             FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,10" HorizontalAlignment="Center"/>

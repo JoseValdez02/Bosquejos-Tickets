@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace Tickets_Bosquejos
         public AdminTicketEdit()
         {
             InitializeComponent();
+            CargarCmbResponsable();
         }
 
         private void btnVolver_Click(object sender, RoutedEventArgs e)
@@ -41,7 +44,7 @@ namespace Tickets_Bosquejos
                 if (!selectedItem.IsEnabled)
                 {
 
-                    cmbResponsable.Text = "Filtrar por Status";
+                    cmbResponsable.Text = "Selecciona a un responsable";
                 }
                 else
                 {
@@ -58,6 +61,37 @@ namespace Tickets_Bosquejos
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).Title = "Asignar Responsable";
+        }
+
+        private void CargarCmbResponsable()
+        {
+            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT pro_clave, pro_nombre FROM sgtprogramadores ORDER BY pro_nombre ASC";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+
+                        cmbResponsable.Items.Add(row["pro_nombre"]);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Error al cargar sistemas" + ex.Message);
+                }
+            }
         }
     }
 }

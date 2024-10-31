@@ -5,8 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tickets_Bosquejos"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminTicketsView">
+      d:DesignHeight="650" d:DesignWidth="1280"
+      Title="Administrar Tickets"
+      Loaded="Page_Loaded">
 
     <Grid Background="#f5f5e5">
 
@@ -16,21 +17,22 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Height="57" VerticalAlignment="Center" Background="#f5f5eb" >
+
+        <DockPanel Grid.Row="0" Height="58" VerticalAlignment="Center" >
 
             <!--Filtrar por status-->
-            <ComboBox x:Name="cmbFiltrarBusqueda" SelectionChanged="cmbFiltrarBusqueda_SelectionChanged" Loaded="cmbFiltrarBusqueda_Loaded" Height="22"  Margin="0,15,25,20" FontSize="14" Width="130"
-                      HorizontalAlignment="Right" DockPanel.Dock="Right" BorderBrush="#333">
+            <ComboBox x:Name="cmbFiltrarBusqueda" SelectionChanged="cmbFiltrarBusqueda_SelectionChanged" Loaded="cmbFiltrarBusqueda_Loaded" Text="Filtrar por Status" Height="24" 
+                  Margin="0,14,25,20" FontSize="14" Width="130" HorizontalAlignment="Right" DockPanel.Dock="Right" BorderBrush="#333" >
                 <ComboBoxItem Content="Filtrar tickets" IsEnabled="False"></ComboBoxItem>
-                <ComboBoxItem Content="Filtrar por Status" IsEnabled="False" FontWeight="Bold"></ComboBoxItem>
+                <ComboBoxItem Content="Filtrar por status" IsEnabled="False"></ComboBoxItem>
                 <ComboBoxItem Content="Nuevo"></ComboBoxItem>
                 <ComboBoxItem Content="Abierto"></ComboBoxItem>
                 <ComboBoxItem Content="Solucionado"></ComboBoxItem>
-                <ComboBoxItem Content="Filtrar por Prioridad" IsEnabled="False" FontWeight="Bold"></ComboBoxItem>
+                <ComboBoxItem Content="Filtrar por prioridad" IsEnabled="False"></ComboBoxItem>
                 <ComboBoxItem Content="Baja"></ComboBoxItem>
                 <ComboBoxItem Content="Media"></ComboBoxItem>
                 <ComboBoxItem Content="Alta"></ComboBoxItem>
-                <ComboBoxItem Content="Critico"></ComboBoxItem>
+                <ComboBoxItem Content="Critica"></ComboBoxItem>
             </ComboBox>
 
             <!--Searchbar-->
@@ -46,12 +48,12 @@
             </Button>
 
             <TextBlock Text="Tickets" Width="80" Height="25" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" DockPanel.Dock="Left" 
-               Margin="12,0,0,8"></TextBlock>
+Margin="12,0,0,8"></TextBlock>
         </DockPanel>
 
-        <StackPanel Grid.Row="1">
-            <ScrollViewer Height="440">
-                <DataGrid x:Name="tableTickets" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="833" ScrollViewer.CanContentScroll="True">
+        <StackPanel Grid.Row="1" Margin="0,10,0,0">
+            <ScrollViewer Height="540">
+                <DataGrid x:Name="tableTickets" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="1050" FontSize="18" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id"></DataGridTextColumn>
                         <DataGridTextColumn Header="Ticket"></DataGridTextColumn>
@@ -71,13 +73,13 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Grid Grid.Row="2" Height="54">
-            <Button x:Name="btnAgregarResponsable" Content="Agregar Responsable" Width="130" Height="25" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="132,27,55,2" BorderThickness="1,1,1,1" Click="btnAgregarResponsable_Click"></Button>
-            <Button x:Name="btnSolucionado" Content="Marcar como solucionado" Width="161" Height="25" HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="3,27,0,2" BorderThickness="1,1,1,1"></Button>
-            <Button x:Name="btnEliminar" Content="Eliminar Ticket" Width="95" Height="25" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,27,132,2" BorderThickness="1,1,1,1"></Button>
-        </Grid>
+        <DockPanel Grid.Row="2" Height="70">
+            <Button x:Name="btnAgregarResponsable" Content="Agregar Responsable/Asignar Fecha" Width="230" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="123,35,55,2" BorderThickness="1,1,1,1" Click="btnAgregarResponsable_Click"></Button>
+            <Button x:Name="btnSolucionado" Content="Marcar como solucionado" Width="161" Height="35" HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="225,35,0,2" BorderThickness="1,1,1,1"></Button>
+            <Button x:Name="btnEliminar" Content="Eliminar Ticket" Width="95" Height="35" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,35,132,2" BorderThickness="1,1,1,1"></Button>
+        </DockPanel>
     </Grid>
 </Page>

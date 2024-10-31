@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Tickets_Bosquejos"
         mc:Ignorable="d"
         Title="Login" Height="450" Width="850"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    
     <Grid>
 
         <Grid.ColumnDefinitions>

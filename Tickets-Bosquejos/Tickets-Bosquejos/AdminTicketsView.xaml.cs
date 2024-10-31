@@ -53,5 +53,11 @@ namespace Tickets_Bosquejos
 
             NavigationService.Navigate(editTicket);
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Window.GetWindow(this).Title = "Administrar Tickets";
+        }
     }
 }

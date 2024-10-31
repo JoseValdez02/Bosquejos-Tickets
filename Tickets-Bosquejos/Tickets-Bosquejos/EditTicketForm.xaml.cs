@@ -35,28 +35,7 @@ namespace Tickets_Bosquejos
             NavigationService.Navigate(misTickets);
         }
 
-        //Poner placeholder
-        private void cmbPrioridad_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cmbPrioridad.SelectedItem != null && cmbPrioridad.SelectedItem is ComboBoxItem selectedItem)
-            {
-                if (!selectedItem.IsEnabled)
-                {
-
-                    cmbPrioridad.Text = "Selecciona la prioridad";
-                }
-                else
-                {
-                    cmbPrioridad.Text = selectedItem.Content.ToString();
-                }
-            }
-        }
-
-            private void cmbPrioridad_Loaded(object sender, RoutedEventArgs e)
-            {
-                cmbPrioridad.SelectedIndex = 0;
-            }
-
+       
 
         //Obtener titulo de la pagina
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -45,9 +45,6 @@ namespace Tickets_Bosquejos
             txtBienvenida.Text = $"{nombreUsuario}\n{nombreEmpresa}";
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Window.GetWindow(this).Title = "Menú";
-        }
+      
     }
 }

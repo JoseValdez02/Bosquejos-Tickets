@@ -5,38 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tickets_Bosquejos"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="1280"
       Title="TicketsForm"
       Loaded="Page_Loaded">
 
         <Grid Background="#f5f5eb">
         <ScrollViewer>
-            <Border Width="720" Margin="0,20,0,10" BorderThickness="1" BorderBrush="#8B3F3C">
-                <StackPanel HorizontalAlignment="Center" Width="696" Margin="0,20,0,0" VerticalAlignment="Top">
+            <Border Width="1050" Margin="0,20,0,10" BorderThickness="1" BorderBrush="#8B3F3C">
+                <StackPanel HorizontalAlignment="Center" Width="1000" Margin="0,20,0,0" VerticalAlignment="Top">
                 <!-- Title -->
-                <TextBlock Text="Nuevo Ticket" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#333" Margin="0,0,0,10" />
+                <TextBlock Text="Nuevo Ticket" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#333" Margin="0,0,0,10" />
                 <!-- Descripcion -->
-                <TextBlock Text="Rellene el formulario con su incidencia para convertirla en ticket" FontSize="12" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Rellene el formulario con su incidencia para convertirla en ticket" FontSize="16" HorizontalAlignment="Center"></TextBlock>
 
                 <!--Form-->
                 <!--Incidencia-->
-                <TextBlock Text="Incidencia" FontSize="14" FontWeight="Bold" />
-                <TextBlock Text="Describa brevemente la incidencia que tiene" FontSize="12" HorizontalAlignment="Left"></TextBlock>
-                <TextBox Name="txtIncidencia" Height="20" FontSize="14" Margin="0,10,0,20" HorizontalAlignment="Left" BorderThickness="2,2,2,2" Background="White" BorderBrush="#333" Width="286" />
+                <TextBlock Text="Incidencia" FontSize="20" FontWeight="Bold" Margin="0,20,0,0" />
+                <TextBlock Text="Describa brevemente la incidencia que tiene" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <TextBox Name="txtIncidencia" Height="24" FontSize="14" Margin="0,10,0,20" HorizontalAlignment="Left" BorderThickness="2,2,2,2" Background="White" BorderBrush="#333" Width="286" />
 
                 <!-- Sistema -->
-                <TextBlock Text="Sistema" FontSize="14" FontWeight="Bold" Foreground="#333" />
-                <TextBlock Text="Seleccione el sistema con el que tiene problema" FontSize="12" HorizontalAlignment="Left"></TextBlock>
-                <ComboBox x:Name="cmbSistema" Height="20"  Margin="0,10,0,20" FontSize="14" Width="174" HorizontalAlignment="Left" BorderBrush="Transparent" >
+                <TextBlock Text="Sistema" FontSize="20" FontWeight="Bold" Foreground="#333" />
+                <TextBlock Text="Seleccione el sistema con el que tiene problema" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <ComboBox x:Name="cmbSistema" SelectionChanged="cmbSistema_SelectionChanged" Loaded="cmbSistema_Loaded" Height="24"  Margin="0,10,0,20" FontSize="14" Width="286" HorizontalAlignment="Left"
+                          BorderBrush="Transparent">
                     <ComboBoxItem Content="Seleccione un sistema" IsEnabled="False"></ComboBoxItem>
                     <ComboBoxItem></ComboBoxItem>
                     <ComboBoxItem></ComboBoxItem>
                 </ComboBox>
 
                 <!-- Prioridad-->
-                <TextBlock Text="Prioridad" FontSize="14" FontWeight="Bold" Foreground="#333" />
-                <TextBlock Text="Que tan urgente es su incidencia" FontSize="12" HorizontalAlignment="Left"></TextBlock>
-                <ComboBox x:Name="cmbPrioridad" SelectionChanged="cmbPrioridad_SelectionChanged" Loaded="cmbPrioridad_Loaded" Height="20"  Margin="0,10,0,20" FontSize="14" Width="178" HorizontalAlignment="Left" BorderBrush="Transparent" >
+                <TextBlock Text="Prioridad" FontSize="20" FontWeight="Bold" Foreground="#333" />
+                <TextBlock Text="Que tan urgente es su incidencia" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <ComboBox x:Name="cmbPrioridad" SelectionChanged="cmbPrioridad_SelectionChanged" Loaded="cmbPrioridad_Loaded" Height="24"  Margin="0,10,0,20" FontSize="14" Width="286" 
+                          HorizontalAlignment="Left" BorderBrush="Transparent" >
                     <ComboBoxItem Content="Selecciona la prioridad" IsEnabled="False"></ComboBoxItem>
                     <ComboBoxItem>Baja</ComboBoxItem>
                     <ComboBoxItem>Media</ComboBoxItem>
@@ -45,26 +47,27 @@
                 </ComboBox>
 
                 <!-- Observaciones-->
-                <TextBlock Text="Observaciones" FontSize="14" FontWeight="Bold" />
-                <TextBlock Text="Agregue todas las observaciones que tenga con respecto a su incidencia" FontSize="12" HorizontalAlignment="Left"></TextBlock>
-                <TextBox Name="txtObservaciones" Height="50" FontSize="14" Margin="0,10,0,20" HorizontalAlignment="Left" BorderThickness="2,2,2,2" Background="White" BorderBrush="#333" Width="286" />
+                <TextBlock Text="Observaciones" FontSize="20" FontWeight="Bold" />
+                <TextBlock Text="Agregue todas las observaciones que tenga con respecto a su incidencia" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <TextBox Name="txtObservaciones" Height="50" FontSize="14" Margin="0,10,0,20" HorizontalAlignment="Left" BorderThickness="2,2,2,2" Background="White" 
+                         TextWrapping="Wrap" BorderBrush="#333" Width="286" />
 
                 
                 <!--PDF-->
-                <TextBlock Text="PDF" FontSize="14" FontWeight="Bold" />
-                <TextBlock Text="Agregue un archivo PDF con sus observacion más detalle si es necesario" FontSize="12" HorizontalAlignment="Left"></TextBlock>
-                <Button x:Name="btnSubirPdf" Content="Subir PDF..." Width="50" Height="20" Margin="0,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent"></Button>
+                <TextBlock Text="PDF" FontSize="20" FontWeight="Bold" />
+                <TextBlock Text="Agregue un archivo PDF con sus observacion más detalle si es necesario" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <Button x:Name="btnSubirPdf" Content="Subir PDF..." Width="65" Height="24" Margin="0,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent"></Button>
 
                 <!--Correo-->
-                <TextBlock Text="Correo" FontSize="14" FontWeight="Bold" />
-                <TextBlock Text="Agregue su correo para notificarle el estado de su ticket" FontSize="12" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Text="Correo" FontSize="20" FontWeight="Bold" />
+                <TextBlock Text="Agregue su correo para notificarle el estado de su ticket" FontSize="14" HorizontalAlignment="Left"></TextBlock>
                 <TextBox Name="txtCorreo" Height="20" FontSize="14" Margin="0,10,0,20" HorizontalAlignment="Left" BorderThickness="2,2,2,2" Background="White" BorderBrush="#333" Width="286" />
                 
                 
 
                     <!-- Button -->
-                <Button Name="btnEnviar" Content="Enviar" Width="150" Height="40" Background="#8B3F3C" Foreground="White"
-                FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="10,20,10,10" HorizontalAlignment="Center"/>
+                <Button Name="btnEnviar" Content="Enviar" Width="160" Height="50" Background="#8B3F3C" Foreground="White"
+                FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="10,50,10,10" HorizontalAlignment="Center"/>
             </StackPanel>
             </Border>
         </ScrollViewer>
