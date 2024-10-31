@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
@@ -106,6 +108,25 @@ namespace Tickets_Bosquejos
 
                     MessageBox.Show("Error al cargar sistemas" + ex.Message);
                 }
+            }
+        }
+
+        private void btnSubirPdf_Click(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.DefaultExt = ".pdf";
+            dialog.Filter = "PDF Files (*.pdf)|*.pdf";
+
+            dialog.Title = "Agregue un documento PDF";
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true) { 
+                
+                string filename = dialog.FileName;
+                txtPdf.Text = filename;
             }
         }
     }
