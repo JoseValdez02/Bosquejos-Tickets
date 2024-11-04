@@ -43,7 +43,7 @@ namespace Tickets_Bosquejos
 
                     string query = @"SELECT u.usu_puesto, u.emp_clave, u.usu_nombre, e.emp_nombre 
                              FROM liccatusuarios u 
-                             JOIN liccatempresas e ON u.emp_clave = e.emp_clave 
+                             INNER JOIN liccatempresas e ON u.emp_clave = e.emp_clave 
                              WHERE u.usu_identificacion = @usuario AND u.usu_password = @password";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@usuario", usuario);

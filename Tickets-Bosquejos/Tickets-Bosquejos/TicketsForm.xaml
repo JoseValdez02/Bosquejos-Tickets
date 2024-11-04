@@ -69,7 +69,7 @@
 
                     <!-- Button -->
                 <Button Name="btnEnviar" Content="Enviar" Width="160" Height="50" Background="#8B3F3C" Foreground="White"
-                FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="10,50,10,10" HorizontalAlignment="Center"/>
+                FontSize="16" FontWeight="Bold" BorderBrush="Transparent" Margin="10,50,10,10" HorizontalAlignment="Center" Click="btnEnviar_Click"/>
             </StackPanel>
             </Border>
         </ScrollViewer>

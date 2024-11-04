@@ -30,14 +30,15 @@
             </ComboBox>
 
             <!--Searchbar-->
-            <Button x:Name="btnBuscar" Width="20" Height="22" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,16,6" BorderThickness="1,1,1,1" BorderBrush="#333">
+            <Button x:Name="btnBuscar" Width="20" Height="22" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,16,6" BorderThickness="1,1,1,1" BorderBrush="#333" Click="btnBuscar_Click">
                 <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\search.png" Height="25"></Image>
             </Button>
 
             <TextBox x:Name="txtSearchBar" Height="22" Width="250" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,0,6" BorderThickness="2,2,2,2" BorderBrush="#333" ></TextBox>
 
             <!--Boton para actualizar-->
-            <Button x:Name="btnActualizar" Width="20" Height="22" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,16,6" BorderThickness="1,1,1,1" BorderBrush="#333">
+            <Button x:Name="btnActualizar" Width="20" Height="22" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,16,6" BorderThickness="1,1,1,1" BorderBrush="#333"
+                    Click="btnActualizar_Click">
                 <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\update.png" Height="25"></Image>
             </Button>
 
@@ -46,20 +47,21 @@
         </DockPanel>
 
         <StackPanel Grid.Row="1" Margin="0,10,0,0">
-            <ScrollViewer Height="540">
-                <DataGrid x:Name="tableTickets" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="1050" FontSize="18" ScrollViewer.CanContentScroll="True">
+            <ScrollViewer Height="540" HorizontalScrollBarVisibility="Auto">
+                <DataGrid x:Name="tableTickets" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="1050" FontSize="18"
+                          IsReadOnly="True" ScrollViewer.CanContentScroll="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ticket"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Sistema"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Status"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Prioridad"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Observaciones"></DataGridTextColumn>
-                        <DataGridTextColumn Header="PDF"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Correo"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Responsable"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Fecha de creación"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Fecha de finalización"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Id" Binding="{Binding tic_clave}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ticket" Binding="{Binding tic_nombre}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Sistema" Binding="{Binding sis_nombre}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Status" Binding="{Binding tic_status}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Prioridad" Binding="{Binding tic_prioridad}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Observaciones" Binding="{Binding tic_observaciones}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="PDF" Binding="{Binding tic_pdf}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Correo" Binding="{Binding tic_correo}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Responsable" Binding="{Binding pro_nombre}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fecha de creación" Binding="{Binding tic_fechacreacion}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fecha de finalización" Binding="{Binding tic_fechafin}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </ScrollViewer>
