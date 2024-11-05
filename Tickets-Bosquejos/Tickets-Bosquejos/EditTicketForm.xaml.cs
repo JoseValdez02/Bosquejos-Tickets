@@ -26,6 +26,7 @@ namespace Tickets_Bosquejos
     public partial class EditTicketForm : Page
     {
 
+        private MyTickets myTicketsPage;
         private byte[] data;
         private int tic_clave;
 
@@ -33,7 +34,11 @@ namespace Tickets_Bosquejos
         {
             InitializeComponent();
 
-            this.tic_clave = tic_clave;
+            //this.myTicketsPage = myTicketsPage;
+
+
+            this.tic_clave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
+
             txtIncidencia.Text = ticketSeleccionado["tic_nombre"].ToString();
             txtSistema.Text = ticketSeleccionado["sis_nombre"].ToString();
             txtPrioridad.Text = ticketSeleccionado["tic_prioridad"].ToString();
@@ -130,15 +135,18 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "UPDATE tickets_prac SET tic_observaciones = @observaciones WHERE tic_clave = @clave";
+                    string query = "UPDATE tickets_prac SET tic_observaciones = @observaciones, tic_pdf = @pdf WHERE tic_clave = @clave";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@observaciones", txtObservaciones.Text);
+                    cmd.Parameters.AddWithValue("@pdf", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("@clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Se actualizo el ticket exitosamente");
-                    NavigationService.GoBack();
-                       
+                    MyTickets myTicketsPage = new MyTickets();
+                    NavigationService.Navigate(myTicketsPage);
+                    myTicketsPage.RecargarTickets();
+
 
                 }
                 catch (Exception ex)
