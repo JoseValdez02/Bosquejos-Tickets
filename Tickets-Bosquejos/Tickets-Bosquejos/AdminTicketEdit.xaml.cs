@@ -87,6 +87,7 @@ namespace Tickets_Bosquejos
             }
         }
 
+        //Volver
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AdminTicketsView());
@@ -96,6 +97,7 @@ namespace Tickets_Bosquejos
             NavigationService.Navigate(ticketsAdmin);
         }
 
+        //Cargar placeholder
         private void cmbResponsable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbResponsable.SelectedItem != null && cmbResponsable.SelectedItem is ComboBoxItem selectedItem)
@@ -116,12 +118,14 @@ namespace Tickets_Bosquejos
         {
             cmbResponsable.SelectedIndex = 0;
         }
-
+        
+        //Cargar titulo
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this).Title = "Asignar Responsable";
         }
 
+        //Cargar tabla de programadores en el combobox
         private void CargarCmbResponsable()
         {
 
@@ -154,6 +158,7 @@ namespace Tickets_Bosquejos
             }
         }
 
+        //Asignar responsable y fecha
         private void btnAsignar_Click(object sender, RoutedEventArgs e)
         {
 
@@ -163,7 +168,7 @@ namespace Tickets_Bosquejos
 
             if (string.IsNullOrEmpty(responsableSeleccionado))
             {
-                MessageBox.Show("Porfavor complete todos los campos obligatorios");
+                MessageBox.Show("Porfavor asigne a un programador este ticket");
                 return;
             }
 

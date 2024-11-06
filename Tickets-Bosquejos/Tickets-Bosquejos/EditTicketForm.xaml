@@ -18,7 +18,7 @@
 
         <DockPanel Grid.Row="0" Height="58" VerticalAlignment="Center" >
             <Button x:Name="btnVolver" Width="35" Height="35" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,6,25,6" BorderThickness="1,1,1,1" BorderBrush="#333" Click="btnVolver_Click">
-                <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\back.png" Height="25"></Image>
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\back.png" Height="25"></Image>
             </Button>
         </DockPanel>
 

@@ -203,7 +203,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-
+        //Ir a la vista para agregar un responsable al ticket
         private void btnAgregarResponsable_Click(object sender, RoutedEventArgs e)
         {
             if (tableTickets.SelectedItem is DataRowView ticketSeleccionado)

@@ -21,7 +21,7 @@
         <!--Lado izquierdo-->
         <Border Grid.Column="0" Background="#8B3F3C" Width="290" Opacity="0.8">
             <Grid>
-                <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\coffee.png" Opacity="0.5" Margin="-76,208,138,-80" RenderTransformOrigin="0.5,0.5">
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\coffee.png" Opacity="0.5" Margin="-76,208,138,-80" RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -32,7 +32,7 @@
                     </Image.RenderTransform>
                 </Image>
 
-                <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\coffee-beans.png" Opacity="0.5" Margin="211,75,-2,257">
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\coffee-beans.png" Opacity="0.5" Margin="211,75,-2,257">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="18.241"/>
@@ -40,10 +40,10 @@
                     </Image.RenderTransform>
                 </Image>
 
-                <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\coffee-leafs.png" Opacity="0.5" Margin="-12,0,190,295" Height="139" Width="112" ></Image>
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\coffee-leafs.png" Opacity="0.5" Margin="-12,0,190,295" Height="139" Width="112" ></Image>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\logo-header.png" Width="250" Height="150" Opacity="0.8"></Image>
+                    <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\logo-header.png" Width="250" Height="150" Opacity="0.8"></Image>
                 </StackPanel>
             </Grid>
         </Border>

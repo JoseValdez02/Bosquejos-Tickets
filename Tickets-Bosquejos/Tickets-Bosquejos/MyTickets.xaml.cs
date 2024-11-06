@@ -162,7 +162,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Recargar el datagrid cuando se edite un ticket
+        //Recargar el datagrid cuando se edite o elimine un ticket
         public void RecargarTickets()
         {
             CargarTickets();

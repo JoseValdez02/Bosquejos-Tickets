@@ -31,7 +31,6 @@ namespace Tickets_Bosquejos
             string usuario = txtUsuario.Text;
             string password = txtPassword.Password; 
 
-            // Cadena de conexión a la base de datos MySQL
             string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))

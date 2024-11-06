@@ -17,7 +17,7 @@
         <DockPanel Grid.Row="0" Background="#8B3F3C" Opacity="0.9" LastChildFill="True">
             <TextBlock x:Name="txtBienvenida" Text=" " TextWrapping="Wrap" Width="250" Height="35" FontSize="14" FontWeight="Bold" Foreground="white" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
             <Button x:Name="btnLogout" Width="30" Height="30" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,10,9,10" BorderBrush="Transparent" Click="btnLogout_Click">
-                <Image Source="C:\Users\SISTEMAS\Documents\Imagenes\logout.png" Height="25"></Image>
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\logout.png" Height="25"></Image>
             </Button>
         </DockPanel>
 
