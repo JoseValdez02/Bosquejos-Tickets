@@ -27,12 +27,12 @@
                 <ComboBoxItem Content="Filtrar por status" IsEnabled="False"></ComboBoxItem>
                 <ComboBoxItem Content="Nuevo"></ComboBoxItem>
                 <ComboBoxItem Content="Abierto"></ComboBoxItem>
-                <ComboBoxItem Content="Solucionado"></ComboBoxItem>
+                <ComboBoxItem Content="Resuelto"></ComboBoxItem>
                 <ComboBoxItem Content="Filtrar por prioridad" IsEnabled="False"></ComboBoxItem>
                 <ComboBoxItem Content="Baja"></ComboBoxItem>
                 <ComboBoxItem Content="Media"></ComboBoxItem>
                 <ComboBoxItem Content="Alta"></ComboBoxItem>
-                <ComboBoxItem Content="Critica"></ComboBoxItem>
+                <ComboBoxItem Content="Crítica"></ComboBoxItem>
             </ComboBox>
 
             <!--Searchbar-->
@@ -59,9 +59,9 @@ Margin="12,0,0,8"></TextBlock>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding tic_clave}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Ticket" Binding="{Binding tic_nombre}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Usuario" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Usuario" Binding="{Binding tic_usuario}" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Sistema" Binding="{Binding sis_nombre}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Empresa"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Empresa" Binding="{Binding emp_nombre}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Status" Binding="{Binding tic_status}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Prioridad" Binding="{Binding tic_prioridad}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Observaciones" Binding="{Binding tic_observaciones}"></DataGridTextColumn>
@@ -78,7 +78,7 @@ Margin="12,0,0,8"></TextBlock>
         <DockPanel Grid.Row="2" Height="70">
             <Button x:Name="btnAgregarResponsable" Content="Agregar Responsable/Asignar Fecha" Width="230" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
 FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="123,35,55,2" BorderThickness="1,1,1,1" Click="btnAgregarResponsable_Click"></Button>
-            <Button x:Name="btnSolucionado" Content="Marcar como solucionado" Width="161" Height="35" HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
+            <Button x:Name="btnSolucionado" Content="Marcar como resuelto" Width="161" Height="35" HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
 FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="225,35,0,2" BorderThickness="1,1,1,1" Click="btnSolucionado_Click"></Button>
             <Button x:Name="btnEliminar" Content="Eliminar Ticket" Width="95" Height="35" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
 FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,35,132,2" BorderThickness="1,1,1,1" Click="btnEliminar_Click"></Button>

@@ -31,7 +31,7 @@ namespace Tickets_Bosquejos
             CargarTickets();
         }
 
-        //Boton para editar un ticket (Enviar a la pagina para editarlo)
+        //Botón para editar un ticket (Enviar a la pagina para editarlo)
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             if(tableTickets.SelectedItem is DataRowView ticketSeleccionado)
@@ -42,11 +42,11 @@ namespace Tickets_Bosquejos
             }
             else
             {
-                MessageBox.Show("Porfavor seleccione un ticket");
+                MessageBox.Show("Por favor seleccione un ticket");
             }
         }
 
-        //Boton para eliminar un ticket
+        //Botón para eliminar un ticket
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             if(tableTickets.SelectedItem is DataRowView ticketSeleccionado)
@@ -54,7 +54,7 @@ namespace Tickets_Bosquejos
 
                 int ticClave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
 
-                MessageBoxResult result = MessageBox.Show("¿Estas seguro de eliminar este ticket", "Tu ticket podria estar en proceso?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("¿Desea eliminar este ticket, podría estar en proceso?", "Eliminar ticket", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if( result == MessageBoxResult.Yes)
                 {
@@ -80,9 +80,9 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    string query = "DELETE FROM tickets_prac WHERE tic_clave = @clave";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@clave", ticClave);
+                    MySqlCommand cmd = new MySqlCommand("eliminarticket", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("v_ticClave", ticClave);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("El ticket ha sido eliminado exitosamente");
@@ -143,9 +143,8 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "SELECT tic_clave, tic_nombre, sis_nombre, tic_status, tic_prioridad, tic_observaciones, tic_pdf, tic_correo, pro_nombre, tic_fechacreacion, tic_fechafin" +
-                        " FROM tickets_prac ORDER BY tic_clave DESC";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlCommand cmd = new MySqlCommand("cargarticketsusers", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -201,7 +200,7 @@ namespace Tickets_Bosquejos
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("No existe este producto: " + ex.Message);
+                    MessageBox.Show("No existe este ticket: " + ex.Message);
 
                 }
             }

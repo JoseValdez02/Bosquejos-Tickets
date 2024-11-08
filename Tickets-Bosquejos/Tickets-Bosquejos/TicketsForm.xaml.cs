@@ -102,8 +102,8 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    string query = "SELECT sis_clave, sis_nombre FROM sgtsistemas ORDER BY sis_nombre ASC";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlCommand cmd = new MySqlCommand("cargarcmbsistemas", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -159,7 +159,7 @@ namespace Tickets_Bosquejos
             if (string.IsNullOrEmpty(incidencia) || string.IsNullOrEmpty(sistema) || string.IsNullOrEmpty(prioridad) || string.IsNullOrEmpty(observaciones)
                     || string.IsNullOrEmpty(correo))
             {
-                MessageBox.Show("Porfavor complete todos los campos obligatorios");
+                MessageBox.Show("Por favor complete todos los campos obligatorios");
                 return;
             }
 
@@ -174,22 +174,18 @@ namespace Tickets_Bosquejos
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand cmd = new MySqlCommand(
-                    @"INSERT INTO tickets_prac
-                        (tic_nombre, sis_nombre, tic_status, tic_prioridad, tic_observaciones, tic_pdf, tic_correo, tic_fechacreacion)
-                        VALUES
-                        (@ticNombre, @sisNombre, @ticStatus, @ticPrioridad, @ticObservaciones, @ticPdf, @ticCorreo,
-                        @ticFechaCreacion)", connection);
 
+                    MySqlCommand cmd = new MySqlCommand("enviarticket", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@ticNombre", incidencia);
-                    cmd.Parameters.AddWithValue("@sisNombre", sistema);
-                    cmd.Parameters.AddWithValue("@ticStatus", "Nuevo");
-                    cmd.Parameters.AddWithValue("@ticPrioridad", prioridad);
-                    cmd.Parameters.AddWithValue("@ticObservaciones", observaciones);
-                    cmd.Parameters.AddWithValue("@ticPdf", data ?? new byte[0]);
-                    cmd.Parameters.AddWithValue("@ticCorreo", correo);
-                    cmd.Parameters.AddWithValue("@ticFechaCreacion", DateTime.Now);
+                    cmd.Parameters.AddWithValue("v_incidencia", incidencia);
+                    cmd.Parameters.AddWithValue("v_sistema", sistema);
+                    cmd.Parameters.AddWithValue("v_status", "Nuevo");
+                    cmd.Parameters.AddWithValue("v_prioridad", prioridad);
+                    cmd.Parameters.AddWithValue("v_observaciones", observaciones);
+                    cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
+                    cmd.Parameters.AddWithValue("v_correo", correo);
+                    cmd.Parameters.AddWithValue("v_fechacreacion", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Ticket enviado exitosamente.");

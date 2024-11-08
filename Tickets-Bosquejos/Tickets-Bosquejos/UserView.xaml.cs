@@ -37,7 +37,7 @@ namespace Tickets_Bosquejos
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("¿Estas seguro de cerrar la sesión?", "Cerrar Sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("¿Estás seguro de cerrar la sesión?", "Cerrar Sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -54,9 +54,6 @@ namespace Tickets_Bosquejos
             txtBienvenida.Text = $"{nombreUsuario}\n{nombreEmpresa}";
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
     }
 }

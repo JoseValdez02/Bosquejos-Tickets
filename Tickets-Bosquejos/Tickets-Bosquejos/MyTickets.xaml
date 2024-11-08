@@ -26,7 +26,7 @@
                 <ComboBoxItem Content="Filtrar por Status" IsEnabled="False"></ComboBoxItem>
                 <ComboBoxItem Content="Nuevo"></ComboBoxItem>
                 <ComboBoxItem Content="Abierto"></ComboBoxItem>
-                <ComboBoxItem Content="Solucionado"></ComboBoxItem>
+                <ComboBoxItem Content="Resuelto"></ComboBoxItem>
             </ComboBox>
 
             <!--Searchbar-->

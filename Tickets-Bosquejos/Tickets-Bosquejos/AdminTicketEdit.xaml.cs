@@ -32,8 +32,7 @@ namespace Tickets_Bosquejos
             InitializeComponent();
             CargarCmbResponsable();
 
-           
-
+         
 
             this.tic_clave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
 
@@ -47,7 +46,7 @@ namespace Tickets_Bosquejos
             
         }
 
-        //Cargar informacion de los tickets en los textblock obteniendo la clave
+        //Cargar información de los tickets en los textblock obteniendo la clave
         private void CargarTickets(int tic_clave)
         {
 
@@ -137,7 +136,7 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    string query = "SELECT pro_clave, pro_nombre FROM sgtprogramadores ORDER BY pro_nombre ASC";
+                    string query = "SELECT pro_clave, pro_nombre FROM liccatprogramadores ORDER BY pro_nombre ASC";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -168,7 +167,7 @@ namespace Tickets_Bosquejos
 
             if (string.IsNullOrEmpty(responsableSeleccionado))
             {
-                MessageBox.Show("Porfavor asigne a un programador este ticket");
+                MessageBox.Show("Por favor asigne a un programador este ticket");
                 return;
             }
 
@@ -189,7 +188,7 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("@clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Se actualizo el ticket exitosamente");
+                    MessageBox.Show("Se actualizó el ticket exitosamente");
                     AdminTicketsView myAdminTicketsView = new AdminTicketsView();
                     NavigationService.Navigate(myAdminTicketsView);
                     myAdminTicketsView.RecargarTickets();

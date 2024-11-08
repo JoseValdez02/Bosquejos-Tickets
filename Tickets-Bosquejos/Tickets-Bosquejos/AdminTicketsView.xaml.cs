@@ -166,7 +166,7 @@ namespace Tickets_Bosquejos
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("No existe este producto: " + ex.Message);
+                    MessageBox.Show("No existe este ticket: " + ex.Message);
 
                 }
             }
@@ -214,7 +214,7 @@ namespace Tickets_Bosquejos
             }
             else
             {
-                MessageBox.Show("Porfavor seleccione un ticket");
+                MessageBox.Show("Por favor seleccione un ticket");
             }
         }
 
@@ -225,11 +225,11 @@ namespace Tickets_Bosquejos
 
                 int ticClave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
 
-                MessageBoxResult result = MessageBox.Show("Este ticket se marcara como solucionado", "¿Esta seguro?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Este ticket se marcará como resuelto \n ¿Está seguro?", "", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    ActualizarStatus(ticClave);
+                    ResueltoStatus(ticClave);
                     RecargarTickets();
                 }
             }
@@ -239,8 +239,8 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Actualizar estado
-        private void ActualizarStatus(int ticClave)
+        //Cambiar estado a resuelto
+        private void ResueltoStatus(int ticClave)
         {
 
             string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
@@ -253,11 +253,11 @@ namespace Tickets_Bosquejos
 
                     string query = "UPDATE tickets_prac SET tic_status = @status WHERE tic_clave = @clave";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@status", "Solucionado");
+                    cmd.Parameters.AddWithValue("@status", "Resuelto");
                     cmd.Parameters.AddWithValue("@clave", ticClave);
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Ticket solucionado");
+                    MessageBox.Show("Ticket resuelto");
 
                 }
                 catch (Exception ex)
@@ -275,7 +275,7 @@ namespace Tickets_Bosquejos
 
                 int ticClave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
 
-                MessageBoxResult result = MessageBox.Show("¿Estas seguro de eliminar este ticket?", "No se podra recuperar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("¿Estás seguro de eliminar este ticket?\n No se podrá recuperar", "Eliminar ticket", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {

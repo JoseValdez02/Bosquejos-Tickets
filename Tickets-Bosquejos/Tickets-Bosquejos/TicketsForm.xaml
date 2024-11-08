@@ -36,14 +36,14 @@
 
                 <!-- Prioridad-->
                 <TextBlock Text="Prioridad" FontSize="20" FontWeight="Bold" Foreground="#333" />
-                <TextBlock Text="Que tan urgente es su incidencia" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Text="Qué tan urgente es su incidencia" FontSize="14" HorizontalAlignment="Left"></TextBlock>
                 <ComboBox x:Name="cmbPrioridad" SelectionChanged="cmbPrioridad_SelectionChanged" Loaded="cmbPrioridad_Loaded" Height="24"  Margin="0,10,0,20" FontSize="14" Width="286" 
                           HorizontalAlignment="Left" BorderBrush="Transparent" >
                     <ComboBoxItem Content="Selecciona la prioridad" IsEnabled="False"></ComboBoxItem>
                     <ComboBoxItem>Baja</ComboBoxItem>
                     <ComboBoxItem>Media</ComboBoxItem>
                     <ComboBoxItem>Alta</ComboBoxItem>
-                    <ComboBoxItem>Critica</ComboBoxItem>
+                    <ComboBoxItem>Crítica</ComboBoxItem>
                 </ComboBox>
 
                 <!-- Observaciones-->
@@ -55,7 +55,7 @@
                 
                 <!--PDF-->
                 <TextBlock Text="PDF" FontSize="20" FontWeight="Bold" />
-                <TextBlock Text="Agregue un archivo PDF con sus observacion más detalle si es necesario" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Text="Agregue un archivo PDF con sus observaciones más a detalle sí es necesario" FontSize="14" HorizontalAlignment="Left"></TextBlock>
                     <TextBox Name="txtPdf" Height="20" FontSize="14" Margin="0,10,0,20" HorizontalAlignment="Left" BorderThickness="2,2,2,2" 
                              Background="White" BorderBrush="#333" Width="286" IsReadOnly="True" />
                     <Button x:Name="btnSubirPdf" Content="Subir PDF..." Width="65" Height="24" Margin="0,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Click="btnSubirPdf_Click"></Button>

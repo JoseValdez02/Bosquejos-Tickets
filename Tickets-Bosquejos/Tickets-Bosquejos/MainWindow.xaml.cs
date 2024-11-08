@@ -40,17 +40,15 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = @"SELECT u.usu_puesto, u.emp_clave, u.usu_nombre, e.emp_nombre 
-                             FROM liccatusuarios u 
-                             INNER JOIN liccatempresas e ON u.emp_clave = e.emp_clave 
-                             WHERE u.usu_identificacion = @usuario AND u.usu_password = @password";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@usuario", usuario);
-                    cmd.Parameters.AddWithValue("@password", password);
+                   
+                    MySqlCommand cmd = new MySqlCommand("loginuser", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_usuario", usuario);
+                    cmd.Parameters.AddWithValue("P_password", password);
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (reader.Read() && reader["usu_puesto"] != DBNull.Value)
                         {
                             string puesto = reader["usu_puesto"].ToString();
                             int empClave = Convert.ToInt32(reader["emp_clave"]);
@@ -58,26 +56,6 @@ namespace Tickets_Bosquejos
                             string nombreEmpresa = reader["emp_nombre"].ToString();
 
                             reader.Close();
-
-                            //Actualizar fecha de inicio de sesión de los usuarios
-                            string actualizarFechaUsuarios = "UPDATE liccatusuarios SET usu_fecha = NOW() WHERE usu_identificacion = @usuario";
-                            MySqlCommand updateUserCmd = new MySqlCommand(actualizarFechaUsuarios, connection);
-                            updateUserCmd.Parameters.AddWithValue("@usuario", usuario);
-                            updateUserCmd.ExecuteNonQuery();
-
-                            //Actualizar fecha de inicio de sesión de las empresas
-                            string actualizarFechaEmpresas = "UPDATE liccatempresas SET usu_fecha = NOW() WHERE emp_clave = @empClave";
-                            MySqlCommand updateEmpresaCmd = new MySqlCommand(actualizarFechaEmpresas, connection);
-                            updateEmpresaCmd.Parameters.AddWithValue("@empClave", empClave);
-                            updateEmpresaCmd.ExecuteNonQuery();
-
-                            //Actualizar quien fue el ultimo usuario de la empresa en ingresar a la empresa
-                            string actualizarEmpresaUsuario = "UPDATE liccatempresas SET usu_identificacion = @usuario WHERE emp_clave = @empClave";
-                            MySqlCommand updateEmpresaUsuarioCmd = new MySqlCommand(actualizarEmpresaUsuario, connection);
-                            updateEmpresaUsuarioCmd.Parameters.AddWithValue("@usuario", usuario);
-                            updateEmpresaUsuarioCmd.Parameters.AddWithValue("@empClave", empClave);
-                            updateEmpresaUsuarioCmd.ExecuteNonQuery();
-
 
                             if (puesto == "soporte")
                             {
@@ -93,7 +71,7 @@ namespace Tickets_Bosquejos
                                 userView.SetUserInfo(nombreUsuario, nombreEmpresa);
                                 userView.Show();
                             }
-
+                            
                             this.Close();
                         }
                         else

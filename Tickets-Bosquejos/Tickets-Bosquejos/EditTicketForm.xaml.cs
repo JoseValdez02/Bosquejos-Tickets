@@ -142,7 +142,7 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("@clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Se actualizo el ticket exitosamente");
+                    MessageBox.Show("Se actualizó el ticket exitosamente");
                     MyTickets myTicketsPage = new MyTickets();
                     NavigationService.Navigate(myTicketsPage);
                     myTicketsPage.RecargarTickets();
