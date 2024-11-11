@@ -82,7 +82,7 @@ namespace Tickets_Bosquejos
 
                     MySqlCommand cmd = new MySqlCommand("eliminarticket", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("v_ticClave", ticClave);
+                    cmd.Parameters.AddWithValue("v_clave", ticClave);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("El ticket ha sido eliminado exitosamente");
@@ -186,16 +186,34 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "SELECT tic_clave, tic_nombre, sis_nombre, tic_status, tic_prioridad, tic_observaciones, tic_pdf, tic_correo, pro_nombre, tic_fechacreacion, tic_fechafin" +
-                        " FROM tickets_prac WHERE tic_clave = @criterio OR tic_nombre LIKE @criterioNombre ORDER BY tic_clave DESC";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@criterio", criterio);
-                    cmd.Parameters.AddWithValue("@criterioNombre", "%" + criterio + "%");
+                    MySqlCommand cmd = new MySqlCommand("buscartickets", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    if (int.TryParse(criterio, out int criterioInt))
+                    {
+                        cmd.Parameters.AddWithValue("p_criterio", criterioInt);
+                        cmd.Parameters.AddWithValue("p_criterioNombre", " ");
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("p_criterio", -1);
+                        cmd.Parameters.AddWithValue("p_criterioNombre", criterio);
+                    }
+
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
 
-                    tableTickets.ItemsSource = dt.DefaultView;
+                    if(dt.Rows.Count > 0)
+                    {
+                        tableTickets.ItemsSource = dt.DefaultView;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron tickets con el criterio proporcionado");
+                    }
+
+                    
                 }
                 catch (Exception ex)
                 {
@@ -219,9 +237,8 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "SELECT tic_clave, tic_nombre, sis_nombre, tic_status, tic_prioridad, tic_observaciones, tic_pdf, tic_correo, pro_nombre, tic_fechacreacion, tic_fechafin" +
-                        " FROM tickets_prac ORDER BY tic_clave DESC";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlCommand cmd = new MySqlCommand("actualizartabla", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);

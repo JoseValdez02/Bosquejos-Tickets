@@ -23,7 +23,7 @@ namespace Tickets_Bosquejos
     public partial class AdminTicketEdit : Page
     {
 
-        private AdminTicketsView myAdminTicketsView;
+       
         private byte[] data;
         private int tic_clave;
 
@@ -46,45 +46,7 @@ namespace Tickets_Bosquejos
             
         }
 
-        //Cargar información de los tickets en los textblock obteniendo la clave
-        private void CargarTickets(int tic_clave)
-        {
-
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                try
-                {
-
-                    connection.Open();
-
-                    string query = "SELECT tic_nombre, sis_nombre, tic_prioridad, tic_observaciones, tic_pdf, tic_correo, tic_fechacreacion" +
-                        " FROM tickets_prac WHERE tic_clave = @clave";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@clave", tic_clave);
-                    MySqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-
-                        txtIncidencia.Text = reader["tic_nombre"].ToString();
-                        txtSistema.Text = reader["sis_nombre"].ToString();
-                        txtPrioridad.Text = reader["tic_prioridad"].ToString();
-                        txtObservaciones.Text = reader["tic_observaciones"].ToString();
-                        txtPdf.Text = reader["tic_pdf"].ToString();
-                        txtCorreo.Text = reader["tic_correo"].ToString();
-                        txtFechaCreacion.Text = reader["tic_fechacreacion"].ToString();
-                    }
-
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("Error al cargar el ticket:" + ex.Message);
-                }
-            }
-        }
+      
 
         //Volver
         private void btnVolver_Click(object sender, RoutedEventArgs e)
@@ -136,8 +98,8 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    string query = "SELECT pro_clave, pro_nombre FROM liccatprogramadores ORDER BY pro_nombre ASC";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlCommand cmd = new MySqlCommand("cargarcmbprogramadores", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -152,7 +114,7 @@ namespace Tickets_Bosquejos
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Error al cargar sistemas" + ex.Message);
+                    MessageBox.Show("Error al cargar lista" + ex.Message);
                 }
             }
         }
@@ -180,12 +142,12 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "UPDATE tickets_prac SET tic_status = @status, pro_nombre = @programador, tic_fechafin = @fechafin WHERE tic_clave = @clave";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@status", "Abierto");
-                    cmd.Parameters.AddWithValue("@programador", responsableSeleccionado);
-                    cmd.Parameters.AddWithValue("@fechaFin", fechaResolucion);
-                    cmd.Parameters.AddWithValue("@clave", tic_clave);
+                    MySqlCommand cmd = new MySqlCommand("asignarresponsable", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("v_status", "Abierto");
+                    cmd.Parameters.AddWithValue("v_programador", responsableSeleccionado);
+                    cmd.Parameters.AddWithValue("v_fechafin", fechaResolucion);
+                    cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Se actualizó el ticket exitosamente");

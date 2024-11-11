@@ -26,7 +26,7 @@ namespace Tickets_Bosquejos
     public partial class EditTicketForm : Page
     {
 
-        private MyTickets myTicketsPage;
+      
         private byte[] data;
         private int tic_clave;
 
@@ -88,41 +88,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-        private void CargarTickets(int tic_clave)
-        {
-
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                try
-                {
-
-                    connection.Open();
-
-                    string query = "SELECT tic_nombre, sis_nombre, tic_prioridad, tic_observaciones, tic_pdf, tic_correo" +
-                        " FROM tickets_prac WHERE tic_clave = @clave";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@clave", tic_clave);
-                    MySqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read()) { 
-                    
-                        txtIncidencia.Text = reader["tic_nombre"].ToString();
-                        txtSistema.Text = reader["sis_nombre"].ToString();
-                        txtPrioridad.Text = reader["tic_prioridad"].ToString();
-                        txtObservaciones.Text = reader["tic_observaciones"].ToString();
-                        txtPdf.Text = reader["tic_pdf"].ToString();
-                        txtCorreo.Text = reader["tic_correo"].ToString();
-                    }
-
-                }
-                catch (Exception ex) { 
-                    
-                    MessageBox.Show("Error al cargar el ticket:" + ex.Message);
-                }
-            }
-        }
+       
         private void btnEnviarEdit_Click(object sender, RoutedEventArgs e)
         {
 
@@ -135,11 +101,11 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "UPDATE tickets_prac SET tic_observaciones = @observaciones, tic_pdf = @pdf WHERE tic_clave = @clave";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@observaciones", txtObservaciones.Text);
-                    cmd.Parameters.AddWithValue("@pdf", data ?? new byte[0]);
-                    cmd.Parameters.AddWithValue("@clave", tic_clave);
+                    MySqlCommand cmd = new MySqlCommand("editarticket", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("v_observaciones", txtObservaciones.Text);
+                    cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
+                    cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Se actualizó el ticket exitosamente");
