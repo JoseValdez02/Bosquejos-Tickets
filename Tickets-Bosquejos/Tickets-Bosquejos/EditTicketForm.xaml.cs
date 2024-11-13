@@ -36,7 +36,7 @@ namespace Tickets_Bosquejos
 
             //this.myTicketsPage = myTicketsPage;
 
-
+            //Cargar el ticket seleccionado en el formulario
             this.tic_clave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
 
             txtIncidencia.Text = ticketSeleccionado["tic_nombre"].ToString();
@@ -63,7 +63,7 @@ namespace Tickets_Bosquejos
         //Obtener titulo de la pagina
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Title = "Editar Tickets";
+            Window.GetWindow(this).Title = "Editar Ticket";
         }
 
 
@@ -74,8 +74,7 @@ namespace Tickets_Bosquejos
 
             dialog.DefaultExt = ".pdf";
             dialog.Filter = "PDF Files (*.pdf)|*.pdf";
-
-            dialog.Title = "Agregue un documento PDF";
+            dialog.Title = "Seleccione un documento PDF";
 
             bool? result = dialog.ShowDialog();
 
@@ -89,6 +88,7 @@ namespace Tickets_Bosquejos
         }
 
        
+        //Enviar actualizaciones del ticket
         private void btnEnviarEdit_Click(object sender, RoutedEventArgs e)
         {
 

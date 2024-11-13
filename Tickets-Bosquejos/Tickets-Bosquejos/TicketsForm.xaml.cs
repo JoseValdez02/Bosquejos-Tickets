@@ -38,8 +38,6 @@ namespace Tickets_Bosquejos
         }
 
       
-
-
         //Poner placeholder
         private void cmbPrioridad_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -90,7 +88,7 @@ namespace Tickets_Bosquejos
             cmbSistema.SelectedIndex = 0;
         }
 
-        //Cargar combobox con los sistemas de la base de datos
+        //Cargar combobox con la tabla de los sistemas
         private void CargarCmbSistemas()
         {
 
@@ -165,6 +163,8 @@ namespace Tickets_Bosquejos
 
             GuardarTicket(incidencia, sistema, prioridad, observaciones, correo);
         }
+
+        //Metodo para guardar un ticket
         private void GuardarTicket(string incidencia, string sistema, string prioridad, string observaciones, string correo)
         {
             string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
@@ -189,6 +189,8 @@ namespace Tickets_Bosquejos
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Ticket enviado exitosamente.");
+                TicketsForm ticketsFormPage = new TicketsForm();
+                NavigationService.Navigate(ticketsFormPage);
             }
             catch (Exception ex) 
             {

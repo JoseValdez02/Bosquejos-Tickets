@@ -26,6 +26,7 @@ namespace Tickets_Bosquejos
             InitializeComponent();
         }
 
+        //Botón de inicio de sesión
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string usuario = txtUsuario.Text;

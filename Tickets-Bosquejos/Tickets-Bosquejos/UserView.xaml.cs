@@ -24,6 +24,7 @@ namespace Tickets_Bosquejos
             InitializeComponent();
         }
 
+        //Navegación entre frames
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new TicketsForm());
@@ -35,6 +36,7 @@ namespace Tickets_Bosquejos
 
         }
 
+        //Cerrar sesión
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("¿Estás seguro de cerrar la sesión?", "Cerrar Sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);

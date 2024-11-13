@@ -36,6 +36,13 @@ namespace Tickets_Bosquejos
         {
             if(tableTickets.SelectedItem is DataRowView ticketSeleccionado)
             {
+                string status = ticketSeleccionado["tic_status"].ToString();
+
+                if (status == "Resuelto")
+                {
+                    MessageBox.Show("Este ticket ya se encuentra resuelto");
+                    return;
+                }
 
                 EditTicketForm editTicket = new EditTicketForm(ticketSeleccionado);
                 this.NavigationService.Navigate(editTicket);
@@ -130,7 +137,7 @@ namespace Tickets_Bosquejos
             Window.GetWindow(this).Title = "Mis Tickets";
         }
 
-        //Cargar tickets en el datagrid
+        //Cargar tabla de los tickets en el datagrid
         private void CargarTickets()
         {
 
@@ -167,12 +174,13 @@ namespace Tickets_Bosquejos
             CargarTickets();
         }
 
-        //Barra de busqueda
+        //Botón para buscar
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
             BuscarTickets(txtSearchBar.Text);
         }
 
+        //Metodo para buscar tickets desde la barra de busqueda
         private void BuscarTickets(string criterio)
         {
 
@@ -268,20 +276,30 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    string query = "SELECT tic_clave, tic_nombre, sis_nombre, tic_status, tic_prioridad, tic_observaciones, tic_pdf, tic_correo, pro_nombre, tic_fechacreacion, tic_fechafin" +
-                        " FROM tickets_prac WHERE tic_status = @statusFiltro ORDER BY tic_clave";
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@statusFiltro", statusFiltro);
+                    MySqlCommand cmd = new MySqlCommand("filtrarstatus", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_statusFiltro", statusFiltro);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
 
                     tableTickets.ItemsSource = dt.DefaultView;
+
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        tableTickets.ItemsSource = dt.DefaultView;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron tickets en el filtro seleccionado");
+                        tableTickets.ItemsSource = null;
+                    }
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("No hay tickets en ese status: " + ex.Message);
+                    MessageBox.Show("Error al filtrar tickets: " + ex.Message);
 
                 }
             }

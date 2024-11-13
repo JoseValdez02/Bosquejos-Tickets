@@ -23,6 +23,7 @@ namespace Tickets_Bosquejos
         {
             InitializeComponent();
 
+            //Cargar página de la vista de los tickets en el frame 
             MainFrame.Navigate(new AdminTicketsView());
         }
 
