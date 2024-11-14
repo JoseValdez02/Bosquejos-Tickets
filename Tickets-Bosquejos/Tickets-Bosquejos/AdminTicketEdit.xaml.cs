@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -39,7 +40,9 @@ namespace Tickets_Bosquejos
             this.tic_clave = Convert.ToInt32(ticketSeleccionado["tic_clave"]);
 
             txtIncidencia.Text = ticketSeleccionado["tic_nombre"].ToString();
+            txtUsuario.Text = ticketSeleccionado["tic_usuario"].ToString();
             txtSistema.Text = ticketSeleccionado["sis_nombre"].ToString();
+            txtEmpresa.Text = ticketSeleccionado["emp_nombre"].ToString();
             txtPrioridad.Text = ticketSeleccionado["tic_prioridad"].ToString();
             txtObservaciones.Text = ticketSeleccionado["tic_observaciones"].ToString();
             txtPdf.Text = ticketSeleccionado["tic_pdf"].ToString();
@@ -158,6 +161,8 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_status", "Abierto");
                     cmd.Parameters.AddWithValue("v_programador", responsableSeleccionado);
                     cmd.Parameters.AddWithValue("v_fechafin", fechaResolucion);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
 

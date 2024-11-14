@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.IO;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -105,6 +106,8 @@ namespace Tickets_Bosquejos
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_observaciones", txtObservaciones.Text);
                     cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
 

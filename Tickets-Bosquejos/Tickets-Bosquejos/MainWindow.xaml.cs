@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -51,25 +52,25 @@ namespace Tickets_Bosquejos
                     {
                         if (reader.Read() && reader["usu_puesto"] != DBNull.Value)
                         {
-                            string puesto = reader["usu_puesto"].ToString();
-                            int empClave = Convert.ToInt32(reader["emp_clave"]);
-                            string nombreUsuario = reader["usu_nombre"].ToString();
-                            string nombreEmpresa = reader["emp_nombre"].ToString();
+                            UserSession.usuPuesto = reader["usu_puesto"].ToString();
+                            UserSession.empClave = Convert.ToInt32(reader["emp_clave"]);
+                            UserSession.usuNombre = reader["usu_nombre"].ToString();
+                            UserSession.empNombre = reader["emp_nombre"].ToString();
+                            UserSession.usuClave = Convert.ToInt32(reader["usu_clave"]);
+                            UserSession.usuIdentificacion = reader["usu_identificacion"].ToString();
 
                             reader.Close();
 
-                            if (puesto == "soporte")
+                            if (UserSession.usuPuesto == "soporte")
                             {
                                 //Si el usuario es de soporte, ingresa a la vista de administrador
                                 AdminView adminView = new AdminView();
-                                adminView.SetUserInfo(nombreUsuario, nombreEmpresa);
                                 adminView.Show();
                             }
                             else
                             {
                                 //Si el usuario es de cualquier otra area, ingresa como usuario
                                 UserView userView = new UserView();
-                                userView.SetUserInfo(nombreUsuario, nombreEmpresa);
                                 userView.Show();
                             }
                             

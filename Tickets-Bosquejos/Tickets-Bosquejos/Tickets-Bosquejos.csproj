@@ -125,6 +125,7 @@
     <Compile Include="TicketsForm.xaml.cs">
       <DependentUpon>TicketsForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserClass\UserSession.cs" />
     <Compile Include="UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>

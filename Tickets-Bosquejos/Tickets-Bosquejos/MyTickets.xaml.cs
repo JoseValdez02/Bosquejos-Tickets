@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -152,6 +153,7 @@ namespace Tickets_Bosquejos
 
                     MySqlCommand cmd = new MySqlCommand("cargarticketsusers", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuIdentificacion);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);

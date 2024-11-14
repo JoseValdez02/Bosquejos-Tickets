@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -296,6 +297,8 @@ namespace Tickets_Bosquejos
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_status", "Resuelto");
                     cmd.Parameters.AddWithValue("v_fechafin", DateTime.Now);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", ticClave);
                     cmd.ExecuteNonQuery();
 

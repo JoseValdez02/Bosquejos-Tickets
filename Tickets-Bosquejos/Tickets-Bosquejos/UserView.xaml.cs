@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -22,6 +23,7 @@ namespace Tickets_Bosquejos
         public UserView()
         {
             InitializeComponent();
+            SetUserInfo();
         }
 
         //Navegación entre frames
@@ -51,9 +53,9 @@ namespace Tickets_Bosquejos
         }
 
         //Metodo para obtener el nombre del usuario y la empresa
-        public void SetUserInfo(string nombreUsuario, string nombreEmpresa)
+        public void SetUserInfo()
         {
-            txtBienvenida.Text = $"{nombreUsuario}\n{nombreEmpresa}";
+            txtBienvenida.Text = $"{UserSession.usuNombre} \n {UserSession.empNombre}";
         }
 
       

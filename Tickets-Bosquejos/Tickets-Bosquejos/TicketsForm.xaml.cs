@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tickets_Bosquejos.UserClass;
 
 namespace Tickets_Bosquejos
 {
@@ -109,7 +110,7 @@ namespace Tickets_Bosquejos
                     foreach (DataRow row in dt.Rows)
                     {
 
-                        cmbSistema.Items.Add(row["sis_nombre"]);
+                        cmbSistema.Items.Add(new KeyValuePair<int, string>((int)row["sis_clave"], row["sis_nombre"].ToString()));
 
                     }
                 }
@@ -149,6 +150,7 @@ namespace Tickets_Bosquejos
         private void btnEnviar_Click(object sender, RoutedEventArgs e)
         {
             string incidencia = txtIncidencia.Text;
+            int? sisClave = (cmbSistema.SelectedValue as int?);
             string sistema = cmbSistema.SelectedItem?.ToString();
             string prioridad = (cmbPrioridad.SelectedItem as ComboBoxItem).Content.ToString();
             string observaciones = txtObservaciones.Text;
@@ -161,11 +163,11 @@ namespace Tickets_Bosquejos
                 return;
             }
 
-            GuardarTicket(incidencia, sistema, prioridad, observaciones, correo);
+            GuardarTicket(incidencia, sisClave, sistema, prioridad, observaciones, correo);
         }
 
         //Metodo para guardar un ticket
-        private void GuardarTicket(string incidencia, string sistema, string prioridad, string observaciones, string correo)
+        private void GuardarTicket(string incidencia, int? sisClave, string sistema, string prioridad, string observaciones, string correo)
         {
             string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
 
@@ -178,14 +180,21 @@ namespace Tickets_Bosquejos
                     MySqlCommand cmd = new MySqlCommand("enviarticket", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    cmd.Parameters.AddWithValue("v_empClave", UserSession.empClave);
+                    cmd.Parameters.AddWithValue("v_usuClave", UserSession.usuClave);
+                    cmd.Parameters.AddWithValue("v_sisClave", sisClave);
                     cmd.Parameters.AddWithValue("v_incidencia", incidencia);
-                    cmd.Parameters.AddWithValue("v_sistema", sistema);
+                    cmd.Parameters.AddWithValue("v_ticUsuario", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_sisNombre", sistema);
+                    cmd.Parameters.AddWithValue("v_empNombre", UserSession.empNombre);
                     cmd.Parameters.AddWithValue("v_status", "Nuevo");
                     cmd.Parameters.AddWithValue("v_prioridad", prioridad);
                     cmd.Parameters.AddWithValue("v_observaciones", observaciones);
                     cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("v_correo", correo);
                     cmd.Parameters.AddWithValue("v_fechacreacion", DateTime.Now);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Ticket enviado exitosamente.");

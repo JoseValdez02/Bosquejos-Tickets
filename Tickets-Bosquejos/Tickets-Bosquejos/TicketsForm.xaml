@@ -28,7 +28,7 @@
                 <TextBlock Text="Sistema" FontSize="20" FontWeight="Bold" Foreground="#333" />
                 <TextBlock Text="Seleccione el sistema con el que tiene problema" FontSize="14" HorizontalAlignment="Left"></TextBlock>
                 <ComboBox x:Name="cmbSistema" SelectionChanged="cmbSistema_SelectionChanged" Loaded="cmbSistema_Loaded" Height="24"  Margin="0,10,0,20" FontSize="14" Width="286" HorizontalAlignment="Left"
-                          BorderBrush="Transparent">
+                          BorderBrush="Transparent" DisplayMemberPath="Value" SelectedValuePath="Key">
                     <ComboBoxItem Content="Seleccione un sistema" IsEnabled="False"></ComboBoxItem>
                     <ComboBoxItem></ComboBoxItem>
                     <ComboBoxItem></ComboBoxItem>
