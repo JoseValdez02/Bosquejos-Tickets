@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-using Tickets_Bosquejos.UserClass;
+using Tickets_Bosquejos.Classes;
 
 namespace Tickets_Bosquejos
 {
@@ -33,9 +33,7 @@ namespace Tickets_Bosquejos
             string usuario = txtUsuario.Text;
             string password = txtPassword.Password; 
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
@@ -57,7 +55,6 @@ namespace Tickets_Bosquejos
                             UserSession.usuNombre = reader["usu_nombre"].ToString();
                             UserSession.empNombre = reader["emp_nombre"].ToString();
                             UserSession.usuClave = Convert.ToInt32(reader["usu_clave"]);
-                            UserSession.usuIdentificacion = reader["usu_identificacion"].ToString();
 
                             reader.Close();
 

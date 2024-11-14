@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Tickets_Bosquejos.UserClass;
+using Tickets_Bosquejos.Classes;
 
 namespace Tickets_Bosquejos
 {
@@ -67,17 +67,19 @@ namespace Tickets_Bosquejos
         private void CargarTickets()
         {
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
+         
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
 
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("cargarticketadmin", connection);
+                    MySqlCommand cmd = new MySqlCommand("cargartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
+                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -94,7 +96,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Recargar el datagrid cuando se edite un ticket
+        //Recargar el datagrid cuando se haga un cambio en un registro
         public void RecargarTickets()
         {
             CargarTickets();
@@ -104,9 +106,8 @@ namespace Tickets_Bosquejos
         //Filtrar busqueda por status
         private void FiltrarBusqueda(string filtrar)
         {
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
 
                 try
@@ -118,6 +119,8 @@ namespace Tickets_Bosquejos
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_statusFiltro", filtrar);
                     cmd.Parameters.AddWithValue("p_prioridadFiltro", filtrar);
+                    cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
+                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -152,9 +155,8 @@ namespace Tickets_Bosquejos
         private void BuscarTickets(string criterio)
         {
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
 
                 try
@@ -162,8 +164,10 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("buscarticketsadmin", connection);
+                    MySqlCommand cmd = new MySqlCommand("buscartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
+                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
 
                     if (int.TryParse(criterio, out int criterioInt))
                     {
@@ -203,9 +207,8 @@ namespace Tickets_Bosquejos
         //Botón de actualizar
         private void btnActualizar_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+  
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
@@ -213,8 +216,10 @@ namespace Tickets_Bosquejos
                     connection.Open();
 
 
-                    MySqlCommand cmd = new MySqlCommand("actualizartablaadmin", connection);
+                    MySqlCommand cmd = new MySqlCommand("actualizartabla", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
+                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -285,9 +290,7 @@ namespace Tickets_Bosquejos
         private void ResueltoStatus(int ticClave)
         {
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
@@ -297,7 +300,7 @@ namespace Tickets_Bosquejos
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_status", "Resuelto");
                     cmd.Parameters.AddWithValue("v_fechafin", DateTime.Now);
-                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", ticClave);
                     cmd.ExecuteNonQuery();
@@ -338,9 +341,7 @@ namespace Tickets_Bosquejos
         private void EliminarTicket(int ticClave)
         {
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {

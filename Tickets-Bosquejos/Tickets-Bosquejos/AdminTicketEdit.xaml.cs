@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Tickets_Bosquejos.UserClass;
+using Tickets_Bosquejos.Classes;
 
 namespace Tickets_Bosquejos
 {
@@ -104,9 +104,7 @@ namespace Tickets_Bosquejos
         private void CargarCmbResponsable()
         {
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
@@ -147,9 +145,7 @@ namespace Tickets_Bosquejos
                 return;
             }
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
@@ -161,7 +157,7 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_status", "Abierto");
                     cmd.Parameters.AddWithValue("v_programador", responsableSeleccionado);
                     cmd.Parameters.AddWithValue("v_fechafin", fechaResolucion);
-                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuNombre", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
@@ -184,9 +180,8 @@ namespace Tickets_Bosquejos
 
         private void btnDescargarPdf_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+          
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {

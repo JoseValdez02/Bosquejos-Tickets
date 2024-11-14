@@ -116,6 +116,7 @@
     <Compile Include="AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Connection.cs" />
     <Compile Include="EditTicketForm.xaml.cs">
       <DependentUpon>EditTicketForm.xaml</DependentUpon>
     </Compile>
@@ -125,7 +126,7 @@
     <Compile Include="TicketsForm.xaml.cs">
       <DependentUpon>TicketsForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserClass\UserSession.cs" />
+    <Compile Include="Classes\UserSession.cs" />
     <Compile Include="UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>

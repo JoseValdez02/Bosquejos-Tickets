@@ -20,7 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Tickets_Bosquejos.UserClass;
+using Tickets_Bosquejos.Classes;
 
 namespace Tickets_Bosquejos
 {
@@ -93,9 +93,7 @@ namespace Tickets_Bosquejos
         private void CargarCmbSistemas()
         {
 
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = Connection.GetConnection())
             {
                 try
                 {
@@ -169,11 +167,10 @@ namespace Tickets_Bosquejos
         //Metodo para guardar un ticket
         private void GuardarTicket(string incidencia, int? sisClave, string sistema, string prioridad, string observaciones, string correo)
         {
-            string connectionString = "server=127.0.0.1;port=3307;database=tickets;user=root;password=marino;";
-
+            
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlConnection connection = Connection.GetConnection())
                 {
                     connection.Open();
 
@@ -184,7 +181,7 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_usuClave", UserSession.usuClave);
                     cmd.Parameters.AddWithValue("v_sisClave", sisClave);
                     cmd.Parameters.AddWithValue("v_incidencia", incidencia);
-                    cmd.Parameters.AddWithValue("v_ticUsuario", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_ticUsuario", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_sisNombre", sistema);
                     cmd.Parameters.AddWithValue("v_empNombre", UserSession.empNombre);
                     cmd.Parameters.AddWithValue("v_status", "Nuevo");
@@ -193,7 +190,7 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("v_correo", correo);
                     cmd.Parameters.AddWithValue("v_fechacreacion", DateTime.Now);
-                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuIdentificacion);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
