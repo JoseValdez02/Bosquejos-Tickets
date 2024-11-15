@@ -11,6 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -21,7 +22,14 @@
             </Button>
         </DockPanel>
 
-        <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#f5f5eb" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Frame>
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <Menu Height="30" VerticalAlignment="Top" Background="#965a5a">
+                <MenuItem Header="Administrar Tickets" FontWeight="Light" Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Click="MenuItem_Click" ></MenuItem>
+                <MenuItem Header="Catálogos" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Click="MenuItem_Click_1"></MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <Frame Grid.Row="2" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#f5f5eb" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Frame>
 
     </Grid>
 </Window>

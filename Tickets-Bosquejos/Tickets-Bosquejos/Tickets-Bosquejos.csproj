@@ -107,6 +107,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminCatView.xaml.cs">
+      <DependentUpon>AdminCatView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminTicketEdit.xaml.cs">
       <DependentUpon>AdminTicketEdit.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,18 @@
     </Compile>
     <Compile Include="AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\EmpresaForm.xaml.cs">
+      <DependentUpon>EmpresaForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\ProgramadorForm.xaml.cs">
+      <DependentUpon>ProgramadorForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\SistemaForm.xaml.cs">
+      <DependentUpon>SistemaForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\UsuarioForm.xaml.cs">
+      <DependentUpon>UsuarioForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Connection.cs" />
     <Compile Include="EditTicketForm.xaml.cs">
@@ -130,6 +145,10 @@
     <Compile Include="UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
+    <Page Include="AdminCatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminTicketEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +158,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\EmpresaForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\ProgramadorForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\SistemaForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\UsuarioForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,5 +252,6 @@
     <Resource Include="Images\tickets.png" />
     <Resource Include="Images\update.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,7 +10,6 @@ namespace Tickets_Bosquejos.Classes
     {
         public static int empClave { get; set; }
         public static int usuClave { get; set; }
-        public static string usuIdentificacion { get; set; }
         public static string usuNombre { get; set; }
         public static string usuPuesto { get; set; }
         public static string empNombre { get; set; }
@@ -19,7 +18,6 @@ namespace Tickets_Bosquejos.Classes
         {
             empClave = 0;
             usuClave = 0;
-            usuIdentificacion = null;
             usuNombre = null;
             usuPuesto = null;
             empNombre = null;

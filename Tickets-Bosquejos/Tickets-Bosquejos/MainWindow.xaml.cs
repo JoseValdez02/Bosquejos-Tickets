@@ -58,6 +58,15 @@ namespace Tickets_Bosquejos
 
                             reader.Close();
 
+                            MySqlCommand logCmd = new MySqlCommand("registrologin", connection);
+                            logCmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            logCmd.Parameters.AddWithValue("p_empClave", UserSession.empClave);
+                            logCmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
+                            logCmd.Parameters.AddWithValue("p_empNombre", UserSession.empNombre);
+                            logCmd.Parameters.AddWithValue("p_usuIdentificacion", UserSession.usuNombre);
+                            logCmd.Parameters.AddWithValue("p_usuFecha", DateTime.Now);
+                            logCmd.ExecuteNonQuery();
+
                             if (UserSession.usuPuesto == "soporte")
                             {
                                 //Si el usuario es de soporte, ingresa a la vista de administrador

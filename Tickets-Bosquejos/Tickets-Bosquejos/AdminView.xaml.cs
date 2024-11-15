@@ -25,8 +25,6 @@ namespace Tickets_Bosquejos
             InitializeComponent();
             SetUserInfo();
 
-            //Cargar página de la vista de los tickets en el frame 
-            MainFrame.Navigate(new AdminTicketsView());
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -48,6 +46,16 @@ namespace Tickets_Bosquejos
             txtBienvenida.Text = $"{UserSession.usuNombre}\n{UserSession.empNombre}";
         }
 
-      
+
+        //Navegación entre frames
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AdminTicketsView());
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AdminCatView());
+        }
     }
 }

@@ -86,7 +86,7 @@
                     </ComboBox>
 
                     <TextBlock Text="Fecha de resolución" FontSize="18" FontWeight="Bold" Foreground="#333" />
-                    <TextBlock Text="Ingrese la fecha en la que el ticket quedará resuelto" FontSize="12" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="Ingrese la fecha en la que el ticket quedará resuelto" FontSize="14" HorizontalAlignment="Left"></TextBlock>
                     <DatePicker Name="txtFechaResolucion" Height="25" FontSize="14" Margin="0,5,0,20" HorizontalAlignment="Left" BorderThickness="2" Background="White" BorderBrush="#333" Width="260" />
 
                     <Button Name="btnAsignar" Content="Asignar" Width="150" Height="40" Background="#8B3F3C" Foreground="White"
