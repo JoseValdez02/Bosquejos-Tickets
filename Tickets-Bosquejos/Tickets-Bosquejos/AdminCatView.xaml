@@ -44,41 +44,28 @@ Margin="12,0,0,8"></TextBlock>
                     <MenuItem x:Name="Sistema" Header="Sistemas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Sistema_Click"></MenuItem>
                     <MenuItem x:Name="Programador" Header="Programadores" FontWeight="Light" Foreground="Black" FontSize="14" Click="Programador_Click"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Empresas" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" ></MenuItem>
-                <MenuItem Header="Usuarios" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" ></MenuItem>
-                <MenuItem Header="Sistemas" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" ></MenuItem>
-                <MenuItem Header="Programadores" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" ></MenuItem>
+                <MenuItem x:Name="CatEmprresas" Header="Empresas" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" 
+                          Click="CatEmprresas_Click"></MenuItem>
+                <MenuItem x:Name="CatUsuarios" Header="Usuarios" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"
+                          Click="CatUsuarios_Click"></MenuItem>
+                <MenuItem x:Name="CatSistemas" Header="Sistemas" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"
+                          Click="CatSistemas_Click"></MenuItem>
+                <MenuItem x:Name="CatProgramadores" Header="Programadores" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" 
+                          Click="CatProgramadores_Click"></MenuItem>
             </Menu>
         </DockPanel>
 
         <StackPanel Grid.Row="2" Margin="0,10,0,0">
             <ScrollViewer Height="440">
-                <DataGrid x:Name="tableTickets" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="1050" FontSize="18" ScrollViewer.CanContentScroll="True"
-                          IsReadOnly="True">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding tic_clave}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ticket" Binding="{Binding tic_nombre}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Usuario" Binding="{Binding tic_usuario}" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Sistema" Binding="{Binding sis_nombre}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Empresa" Binding="{Binding emp_nombre}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Status" Binding="{Binding tic_status}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Prioridad" Binding="{Binding tic_prioridad}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Observaciones" Binding="{Binding tic_observaciones}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="PDF" Binding="{Binding tic_pdf}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Correo" Binding="{Binding tic_correo}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Responsable" Binding="{Binding pro_nombre}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Fecha de creación" Binding="{Binding tic_fechacreacion}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Fecha de finalización" Binding="{Binding tic_fechafin}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ContentControl x:Name="CatalogoContent"></ContentControl>
             </ScrollViewer>
         </StackPanel>
 
         <DockPanel Grid.Row="3" Height="90">
             <Button x:Name="btnEditar" Content="Editar" Width="95" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="500,30,0,0" BorderThickness="1,1,1,1" ></Button>
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="500,30,0,0" BorderThickness="1,1,1,1" Click="btnEditar_Click"></Button>
             <Button x:Name="btnEliminar" Content="Eliminar" Width="95" Height="35" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,30,500,0" BorderThickness="1,1,1,1" ></Button>
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,30,500,0" BorderThickness="1,1,1,1" Click="btnEliminar_Click" ></Button>
         </DockPanel>
     </Grid>
 </Page>

@@ -119,6 +119,30 @@
     <Compile Include="AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Catálogos\CatEmpresas.xaml.cs">
+      <DependentUpon>CatEmpresas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\CatProgramadores.xaml.cs">
+      <DependentUpon>CatProgramadores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\CatSistemas.xaml.cs">
+      <DependentUpon>CatSistemas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\CatUsuarios.xaml.cs">
+      <DependentUpon>CatUsuarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\EditEmpresa.xaml.cs">
+      <DependentUpon>EditEmpresa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\EditProgramador.xaml.cs">
+      <DependentUpon>EditProgramador.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\EditSistema.xaml.cs">
+      <DependentUpon>EditSistema.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catálogos\EditUsuario.xaml.cs">
+      <DependentUpon>EditUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Catálogos\EmpresaForm.xaml.cs">
       <DependentUpon>EmpresaForm.xaml</DependentUpon>
     </Compile>
@@ -158,6 +182,38 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\CatEmpresas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\CatProgramadores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\CatSistemas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\CatUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\EditEmpresa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\EditProgramador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\EditSistema.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catálogos\EditUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

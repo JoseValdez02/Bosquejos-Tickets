@@ -16,15 +16,15 @@
 
                 <TextBlock Text="Nombre" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="10,0,0,0"/>
                 <TextBlock Text="Ingrese el nombre del programador" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,0,0,0"></TextBlock>
-                <TextBox Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" ></TextBox>
+                <TextBox Name="txtProgramador" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" ></TextBox>
 
 
                 <TextBlock Text="Correo" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="10,0,0,0"/>
                 <TextBlock Text="Ingrese el correo del programador" FontSize="12" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="10,0,0,0"></TextBlock>
-                <TextBox Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" ></TextBox>
+                <TextBox Name="txtCorreo" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" ></TextBox>
                
-                <Button  Content="Registrar" Width="130" Height="30" Background="#8B3F3C" Foreground="White"
-FontSize="14" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,10" HorizontalAlignment="Center" />
+                <Button Name="btnSubirProgramador" Content="Registrar" Width="130" Height="30" Background="#8B3F3C" Foreground="White"
+FontSize="14" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,10" HorizontalAlignment="Center" Click="btnSubirProgramador_Click"/>
             </StackPanel>
         </Border>
     </Grid>

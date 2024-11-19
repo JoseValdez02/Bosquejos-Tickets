@@ -49,5 +49,35 @@ namespace Tickets_Bosquejos
             var programador = new ProgramadorForm();
             programador.ShowDialog();
         }
+
+        private void CatEmprresas_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogoContent.Content = new Catálogos.CatEmpresas();
+        }
+
+        private void CatUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogoContent.Content = new Catálogos.CatUsuarios();
+        }
+
+        private void CatSistemas_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogoContent.Content = new Catálogos.CatSistemas();
+        }
+
+        private void CatProgramadores_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogoContent.Content = new Catálogos.CatProgramadores();
+        }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
