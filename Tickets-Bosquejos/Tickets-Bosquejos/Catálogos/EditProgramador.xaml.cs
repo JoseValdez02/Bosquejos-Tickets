@@ -23,5 +23,10 @@ namespace Tickets_Bosquejos.Catálogos
         {
             InitializeComponent();
         }
+
+        private void btnEditProgramador_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -136,8 +136,7 @@ namespace Tickets_Bosquejos
         {
 
             string responsableSeleccionado = cmbResponsable.SelectedItem?.ToString();
-            DateTime? fechaResolucion = txtFechaResolucion.SelectedDate;
-
+          
 
             if (string.IsNullOrEmpty(responsableSeleccionado))
             {
@@ -156,8 +155,7 @@ namespace Tickets_Bosquejos
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_status", "Abierto");
                     cmd.Parameters.AddWithValue("v_programador", responsableSeleccionado);
-                    cmd.Parameters.AddWithValue("v_fechafin", fechaResolucion);
-                    cmd.Parameters.AddWithValue("v_usuNombre", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
@@ -225,6 +223,45 @@ namespace Tickets_Bosquejos
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al descargar el archivo PDF: " + ex.Message);
+                }
+            }
+        }
+
+        private void btnAgregarFecha_Click(object sender, RoutedEventArgs e)
+        {
+           
+            DateTime? fechaResolucion = txtFechaResolucion.SelectedDate;
+
+
+
+            using (MySqlConnection connection = Connection.GetConnection())
+            {
+                try
+                {
+
+                    connection.Open();
+
+                    MySqlCommand cmd = new MySqlCommand("asignarfecharesolucion", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("v_status", "Abierto");
+                    cmd.Parameters.AddWithValue("v_fechaFin", fechaResolucion);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
+                    cmd.Parameters.AddWithValue("v_clave", tic_clave);
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Se actualizó el ticket exitosamente");
+                    AdminTicketsView myAdminTicketsView = new AdminTicketsView();
+                    NavigationService.Navigate(myAdminTicketsView);
+                    myAdminTicketsView.RecargarTickets();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Error al cargar los tickets: " + ex.Message);
+
                 }
             }
         }

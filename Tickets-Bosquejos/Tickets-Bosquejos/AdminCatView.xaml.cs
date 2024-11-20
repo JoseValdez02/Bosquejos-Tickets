@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Tickets_Bosquejos.Catálogos;
 
+
 namespace Tickets_Bosquejos
 {
     /// <summary>
@@ -21,6 +23,8 @@ namespace Tickets_Bosquejos
     /// </summary>
     public partial class AdminCatView : Page
     {
+        private UserControl activeUserControl;
+
         public AdminCatView()
         {
             InitializeComponent();
@@ -70,9 +74,33 @@ namespace Tickets_Bosquejos
             CatalogoContent.Content = new Catálogos.CatProgramadores();
         }
 
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        //Metodo para seleccionar un registro de los controles usuario
+        private void LoadUserControl(UserControl control)
         {
+            activeUserControl = control;
+            CatalogoContent.Content = control;
+        }
 
+       private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+           if (activeUserControl is CatEmpresas empresasControl)
+            {
+                // Obtén el usuario seleccionado
+                if (empresasControl.empresaSeleccionada is DataRowView empresaSelected)
+                {
+
+                    EditEmpresa editEmpresaForm = new EditEmpresa(empresaSelected);
+                    editEmpresaForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona una empresa");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay un catálogo activo o no se puede editar.");
+            }
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)

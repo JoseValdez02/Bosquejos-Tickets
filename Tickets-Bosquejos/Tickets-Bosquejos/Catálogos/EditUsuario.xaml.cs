@@ -22,9 +22,20 @@ namespace Tickets_Bosquejos.Catálogos
         public EditUsuario()
         {
             InitializeComponent();
+
         }
 
         private void btnEditUsuario_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cmbEmpresa_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cmbEmpresa_Loaded(object sender, RoutedEventArgs e)
         {
 
         }

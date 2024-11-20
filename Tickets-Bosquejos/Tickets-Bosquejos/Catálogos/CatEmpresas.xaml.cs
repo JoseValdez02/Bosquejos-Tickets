@@ -23,6 +23,7 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class CatEmpresas : UserControl
     {
+        public DataRowView empresaSeleccionada => (DataRowView)tableEmpresas.SelectedItem;
         public CatEmpresas()
         {
             InitializeComponent();
