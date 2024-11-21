@@ -23,6 +23,7 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class CatUsuarios : UserControl
     {
+        public DataRowView usuarioSeleccionado => (DataRowView)tableUsuarios.SelectedItem;
         public CatUsuarios()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Tickets_Bosquejos.Catálogos
             CargarUsuarios();
         }
 
-        private void CargarUsuarios()
+        public void CargarUsuarios()
         {
             using (MySqlConnection connection = Connection.GetConnection())
             {
@@ -57,6 +58,38 @@ namespace Tickets_Bosquejos.Catálogos
             }
          }
 
- 
+        public void EliminarUsuario()
+        {
+            if (usuarioSeleccionado != null)
+            {
+
+                int usuClave = Convert.ToInt32(usuarioSeleccionado["usu_clave"]);
+
+                MessageBoxResult result = MessageBox.Show("¿Desea eliminar este usuario?", "Eliminar usuario", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (MySqlConnection connection = Connection.GetConnection())
+                    {
+                        try
+                        {
+                            connection.Open();
+
+                            MySqlCommand cmd = new MySqlCommand("eliminarusuario", connection);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("v_clave", usuClave);
+                            cmd.ExecuteNonQuery();
+
+                            MessageBox.Show("Usuario eliminado correctamente");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al eliminar al usuario" + ex.Message);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

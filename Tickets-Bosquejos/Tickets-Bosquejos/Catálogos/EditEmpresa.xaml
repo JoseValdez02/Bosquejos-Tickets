@@ -20,7 +20,7 @@
 
 
                 <TextBlock Text="Logotipo" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="10,0,0,0"/>
-                <TextBox Name="TxtLogo" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True"></TextBox>
+                <TextBox Name="txtLogo" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True"></TextBox>
                 <Button x:Name="btnEditLogo" Content="Cambiar logotipo" Width="98" Height="24" Margin="10,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent"
                         Click="btnEditLogo_Click"></Button>
 

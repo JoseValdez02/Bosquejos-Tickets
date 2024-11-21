@@ -31,7 +31,7 @@ namespace Tickets_Bosquejos.Catálogos
             CargarEmpresas();
         }
 
-        private void CargarEmpresas()
+        public void CargarEmpresas()
         {
             using (MySqlConnection connection = Connection.GetConnection())
             {
@@ -54,6 +54,40 @@ namespace Tickets_Bosquejos.Catálogos
 
                     MessageBox.Show("Error al cargar el catálogo: " + ex.Message);
 
+                }
+            }
+        }
+
+        public void EliminarEmpresa()
+        {
+            if (empresaSeleccionada != null)
+            {
+
+                int empClave = Convert.ToInt32(empresaSeleccionada["emp_clave"]);
+
+                MessageBoxResult result = MessageBox.Show("¿Desea eliminar esta empresa?", "Eliminar empresa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (MySqlConnection connection = Connection.GetConnection())
+                    {
+                        try
+                        {
+                            connection.Open();
+
+                            MySqlCommand cmd = new MySqlCommand("eliminarempresa", connection);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("v_clave", empClave);
+                            cmd.ExecuteNonQuery();
+
+                            MessageBox.Show("Empresa eliminada correctamente");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al eliminar la empresa" + ex.Message);
+                        }
+                    }
                 }
             }
         }

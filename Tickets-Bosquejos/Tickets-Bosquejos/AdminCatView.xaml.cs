@@ -30,6 +30,7 @@ namespace Tickets_Bosquejos
             InitializeComponent();
         }
 
+        //Abrir formularios para dar de alta usuarios, empresas, sistemas y programadores
         private void Empresa_Click(object sender, RoutedEventArgs e)
         {
             var empresa = new EmpresaForm();
@@ -54,38 +55,43 @@ namespace Tickets_Bosquejos
             programador.ShowDialog();
         }
 
+        // Cargar catálogos en el ContentControl
         private void CatEmprresas_Click(object sender, RoutedEventArgs e)
         {
-            CatalogoContent.Content = new Catálogos.CatEmpresas();
+            //Cargar los controles de usuario de los catalogos en el ContentControl
+            var empresasControl = new CatEmpresas();
+            CatalogoContent.Content = empresasControl;
+            activeUserControl = empresasControl;
         }
 
         private void CatUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            CatalogoContent.Content = new Catálogos.CatUsuarios();
+            var usuariosControl = new CatUsuarios();
+            CatalogoContent.Content = usuariosControl;
+            activeUserControl = usuariosControl;
         }
 
         private void CatSistemas_Click(object sender, RoutedEventArgs e)
         {
-            CatalogoContent.Content = new Catálogos.CatSistemas();
+            var sistemasControl = new CatSistemas();
+            CatalogoContent.Content = sistemasControl;
+            activeUserControl = sistemasControl;
         }
 
         private void CatProgramadores_Click(object sender, RoutedEventArgs e)
         {
-            CatalogoContent.Content = new Catálogos.CatProgramadores();
+            var programadoresControl = new CatProgramadores();
+            CatalogoContent.Content = programadoresControl;
+            activeUserControl = programadoresControl;
         }
 
-        //Metodo para seleccionar un registro de los controles usuario
-        private void LoadUserControl(UserControl control)
-        {
-            activeUserControl = control;
-            CatalogoContent.Content = control;
-        }
-
+      
+        //Editar un registro de los catálogos
        private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
            if (activeUserControl is CatEmpresas empresasControl)
             {
-                // Obtén el usuario seleccionado
+                // Obtener la empresa seleccionado
                 if (empresasControl.empresaSeleccionada is DataRowView empresaSelected)
                 {
 
@@ -97,15 +103,109 @@ namespace Tickets_Bosquejos
                     MessageBox.Show("Selecciona una empresa");
                 }
             }
+           else if(activeUserControl is CatUsuarios usuariosControl)
+            {
+
+                if(usuariosControl.usuarioSeleccionado is DataRowView usuarioSelected)
+                {
+
+                    EditUsuario editUsuarioForm = new EditUsuario(usuarioSelected);
+                    editUsuarioForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un usuario");
+                }
+            }
+            else if (activeUserControl is CatSistemas sistemasControl)
+            {
+
+                if (sistemasControl.sistemaSeleccionado is DataRowView sistemaSelected)
+                {
+
+                    EditSistema editSistemaForm = new EditSistema(sistemaSelected);
+                    editSistemaForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un sistema");
+                }
+            }
+            else if (activeUserControl is CatProgramadores programadoresControl)
+            {
+
+                if (programadoresControl.programadorSeleccionado is DataRowView programadorSelected)
+                {
+
+                    EditProgramador editProgramadorForm = new EditProgramador(programadorSelected);
+                    editProgramadorForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un programador");
+                }
+            }
             else
             {
                 MessageBox.Show("No hay un catálogo activo o no se puede editar.");
             }
         }
 
+        // Seleccionar un registro de los catálogos para eliminar
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            if (activeUserControl is CatEmpresas empresasControl)
+            {
 
+                empresasControl.EliminarEmpresa();
+            }
+            else if (activeUserControl is CatUsuarios usuariosControl)
+            {
+                usuariosControl.EliminarUsuario();
+            }
+            else if (activeUserControl is CatSistemas sistemasControl)
+            {
+                sistemasControl.EliminarSistema();
+            }
+            else if (activeUserControl is CatProgramadores programadoresControl)
+            {
+                programadoresControl.EliminarProgramador();
+            }
+            else
+            {
+                MessageBox.Show("No hay un catálogo activo o se ha seleccionado un registro");
+            }
+        }
+
+
+        //Actualizar algún catálogo
+        private void btnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            if (activeUserControl is CatEmpresas empresasControl)
+            {
+                empresasControl.CargarEmpresas();
+            }
+            else if (activeUserControl is CatUsuarios usuariosControl)
+            {
+                usuariosControl.CargarUsuarios();
+            }
+            else if (activeUserControl is CatSistemas sistemasControl)
+            {
+                sistemasControl.CargarSistemas();
+            }
+            else if (activeUserControl is CatProgramadores programadoresControl)
+            {
+                programadoresControl.CargarProgramadores();
+            }
+            else
+            {
+                MessageBox.Show("No hay un catálogo activo");
+            }
+        }
+
+        private void btnBuscar_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

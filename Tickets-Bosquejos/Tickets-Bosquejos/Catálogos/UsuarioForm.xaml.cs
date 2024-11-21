@@ -127,7 +127,7 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Usuario registrada con éxito.");
+                MessageBox.Show("Usuario registrado con éxito.");
                 this.Close();
 
 

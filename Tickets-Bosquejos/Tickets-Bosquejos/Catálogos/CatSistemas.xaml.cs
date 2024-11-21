@@ -23,13 +23,14 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class CatSistemas : UserControl
     {
+        public DataRowView sistemaSeleccionado => (DataRowView)tableSistemas.SelectedItem;
         public CatSistemas()
         {
             InitializeComponent();
             CargarSistemas();
         }
 
-        private void CargarSistemas()
+        public void CargarSistemas()
         {
             using (MySqlConnection connection = Connection.GetConnection())
             {
@@ -52,6 +53,40 @@ namespace Tickets_Bosquejos.Catálogos
 
                     MessageBox.Show("Error al cargar el catálogo: " + ex.Message);
 
+                }
+            }
+        }
+
+        public void EliminarSistema()
+        {
+            if (sistemaSeleccionado != null)
+            {
+
+                int sisClave = Convert.ToInt32(sistemaSeleccionado["sis_clave"]);
+
+                MessageBoxResult result = MessageBox.Show("¿Desea eliminar este sistema?", "Eliminar sistema", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (MySqlConnection connection = Connection.GetConnection())
+                    {
+                        try
+                        {
+                            connection.Open();
+
+                            MySqlCommand cmd = new MySqlCommand("eliminarsistema", connection);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("v_clave", sisClave);
+                            cmd.ExecuteNonQuery();
+
+                            MessageBox.Show("Sistema eliminado correctamente");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al eliminar el sistema" + ex.Message);
+                        }
+                    }
                 }
             }
         }

@@ -242,7 +242,7 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("actualizartabla", connection);
+                    MySqlCommand cmd = new MySqlCommand("cargartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);

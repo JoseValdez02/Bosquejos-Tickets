@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Tickets_Bosquejos.Classes;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Tickets_Bosquejos
 {
@@ -160,7 +161,9 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Se actualizó el ticket exitosamente");
+                    MessageBox.Show("Se agrego al responsable exitosamente");
+
+                    MostrarNotificacion(responsableSeleccionado);
                     AdminTicketsView myAdminTicketsView = new AdminTicketsView();
                     NavigationService.Navigate(myAdminTicketsView);
                     myAdminTicketsView.RecargarTickets();
@@ -174,6 +177,19 @@ namespace Tickets_Bosquejos
 
                 }
             }
+        }
+
+        //Notificar
+        private void MostrarNotificacion(string responsable)
+        {
+
+            // Generar la notificación de Windows
+            new ToastContentBuilder()
+                .AddArgument("action", "viewTicket")
+                .AddArgument("ticketId", tic_clave)
+                .AddText("Nuevo ticket asignado")
+                .AddText($"El ticket #{tic_clave} ha sido asignado a {responsable}.")
+                .Show(); // Muestra la notificación
         }
 
         private void btnDescargarPdf_Click(object sender, RoutedEventArgs e)

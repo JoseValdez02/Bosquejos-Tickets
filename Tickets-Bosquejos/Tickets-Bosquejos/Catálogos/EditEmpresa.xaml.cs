@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tickets_Bosquejos.Classes;
 
 namespace Tickets_Bosquejos.Catálogos
 {
@@ -26,22 +27,34 @@ namespace Tickets_Bosquejos.Catálogos
 
         private byte[] data;
 
-       public DataRowView EmpresaSelected { get; }
+        public DataRowView EmpresaSelected { get; }
 
-       private int emp_clave;
+        private int emp_clave;
 
-        public EditEmpresa(CatEmpresas empresaSelected)
+        public EditEmpresa(DataRowView empresaSeleccionada)
         {
             InitializeComponent();
 
-           this.emp_clave = Convert.ToInt32(empresaSeleccionada["emp_clave"]);
-            txtEmpresa.Text = empresaSeleccionada["emp_nombre"].ToString();
-            txtLogotipo.Text = empresaSeleccionada["tic_pdf"].ToString();
-        }
+            if (empresaSeleccionada != null)
+            {
+                EmpresaSelected = empresaSeleccionada;
 
-      public EditEmpresa(DataRowView empresaSelected)
-        {
-            EmpresaSelected = empresaSelected;
+                if (int.TryParse(empresaSeleccionada["emp_clave"].ToString(), out int clave))
+                {
+                    this.emp_clave = clave;
+                    txtEmpresa.Text = empresaSeleccionada["emp_nombre"].ToString();
+                    txtLogo.Text = empresaSeleccionada["emp_logo"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("El identificador de la empresa no es válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se pudo cargar la empresa seleccionada.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
         }
 
         private void btnEditLogo_Click(object sender, RoutedEventArgs e)
@@ -59,14 +72,37 @@ namespace Tickets_Bosquejos.Catálogos
             {
 
                 string filename = dialog.FileName;
-                TxtLogo.Text = filename;
+                txtLogo.Text = filename;
                 data = File.ReadAllBytes(filename);
             }
         }
 
         private void btnEditEmpresa_Click(object sender, RoutedEventArgs e)
         {
+            using (MySqlConnection connection = Connection.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
 
+                    MySqlCommand cmd = new MySqlCommand("editarempresa", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("v_empNombre", txtEmpresa.Text);
+                    cmd.Parameters.AddWithValue("v_logo", data ?? new byte[0]);
+                    cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
+                    cmd.Parameters.AddWithValue("v_clave", emp_clave);
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Empresa editada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                   
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al editar la empresa: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

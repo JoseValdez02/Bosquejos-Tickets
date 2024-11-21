@@ -23,13 +23,14 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class CatProgramadores : UserControl
     {
+        public DataRowView programadorSeleccionado => (DataRowView)tableProgramadores.SelectedItem;
         public CatProgramadores()
         {
             InitializeComponent();
-            CargarSistemas();
+            CargarProgramadores();
         }
 
-        private void CargarSistemas()
+        public void CargarProgramadores()
         {
             using (MySqlConnection connection = Connection.GetConnection())
             {
@@ -52,6 +53,40 @@ namespace Tickets_Bosquejos.Catálogos
 
                     MessageBox.Show("Error al cargar el catálogo: " + ex.Message);
 
+                }
+            }
+        }
+
+        public void EliminarProgramador()
+        {
+            if (programadorSeleccionado != null)
+            {
+
+                int proClave = Convert.ToInt32(programadorSeleccionado["pro_clave"]);
+
+                MessageBoxResult result = MessageBox.Show("¿Desea eliminar a este programador?", "Eliminar programador", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (MySqlConnection connection = Connection.GetConnection())
+                    {
+                        try
+                        {
+                            connection.Open();
+
+                            MySqlCommand cmd = new MySqlCommand("eliminarprogramador", connection);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("v_clave", proClave);
+                            cmd.ExecuteNonQuery();
+
+                            MessageBox.Show("Empresa eliminada correctamente");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al eliminar la empresa" + ex.Message);
+                        }
+                    }
                 }
             }
         }
