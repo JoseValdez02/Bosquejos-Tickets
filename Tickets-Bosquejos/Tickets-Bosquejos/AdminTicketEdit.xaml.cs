@@ -163,7 +163,7 @@ namespace Tickets_Bosquejos
 
                     MessageBox.Show("Se agrego al responsable exitosamente");
 
-                    MostrarNotificacion(responsableSeleccionado);
+                    MostrarNotificacion(responsableSeleccionado, txtIncidencia.Text, txtUsuario.Text, txtPrioridad.Text);
                     AdminTicketsView myAdminTicketsView = new AdminTicketsView();
                     NavigationService.Navigate(myAdminTicketsView);
                     myAdminTicketsView.RecargarTickets();
@@ -180,15 +180,17 @@ namespace Tickets_Bosquejos
         }
 
         //Notificar
-        private void MostrarNotificacion(string responsable)
+        private void MostrarNotificacion(string responsable, string incidencia, string usuario, string prioridad)
         {
 
             // Generar la notificación de Windows
             new ToastContentBuilder()
                 .AddArgument("action", "viewTicket")
                 .AddArgument("ticketId", tic_clave)
-                .AddText("Nuevo ticket asignado")
-                .AddText($"El ticket #{tic_clave} ha sido asignado a {responsable}.")
+                .AddText($"Nuevo ticket asignado: {incidencia}")
+                .AddText($"Prioridad: {prioridad}")
+                .AddText($"El ticket #{tic_clave} ha sido asignado a {responsable}.\n" +
+                $"Atienda el ticket y asigne una fecha de resolución")
                 .Show(); // Muestra la notificación
         }
 

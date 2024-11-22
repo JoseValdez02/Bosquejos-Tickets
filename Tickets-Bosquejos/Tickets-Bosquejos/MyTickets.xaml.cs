@@ -149,7 +149,7 @@ namespace Tickets_Bosquejos
 
                     MySqlCommand cmd = new MySqlCommand("cargartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
