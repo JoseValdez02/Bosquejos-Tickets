@@ -22,9 +22,11 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class ProgramadorForm : Window
     {
-        public ProgramadorForm()
+        private readonly Action recargarTabla;
+        public ProgramadorForm(Action recargar)
         {
             InitializeComponent();
+            recargarTabla = recargar;
         }
 
         private void btnSubirProgramador_Click(object sender, RoutedEventArgs e)
@@ -63,6 +65,8 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Sistema registrado con éxito.");
+
+                recargarTabla?.Invoke();
                 this.Close();
 
 

@@ -23,9 +23,11 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class SistemaForm : Window
     {
-        public SistemaForm()
+        private readonly Action recargarTabla;
+        public SistemaForm(Action recargar)
         {
             InitializeComponent();
+            recargarTabla = recargar;
         }
 
         private void btnSubirSistema_Click(object sender, RoutedEventArgs e)
@@ -66,6 +68,8 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Sistema registrado con éxito.");
+
+                recargarTabla?.Invoke();
                 this.Close();
 
 

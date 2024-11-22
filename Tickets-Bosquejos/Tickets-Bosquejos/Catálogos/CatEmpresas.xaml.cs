@@ -59,6 +59,11 @@ namespace Tickets_Bosquejos.Catálogos
             }
         }
 
+       /* public void RecargarTablas()
+        {
+            CargarEmpresas();
+        }*/
+
         //Recargar automaticamente cuando se haga una modificación
         public void Recargar()
         {

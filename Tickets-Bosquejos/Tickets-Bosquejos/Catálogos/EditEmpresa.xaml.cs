@@ -24,7 +24,7 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class EditEmpresa : Window
     {
-
+       
         private byte[] data;
 
         public DataRowView EmpresaSelected { get; }

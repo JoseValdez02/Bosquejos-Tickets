@@ -26,11 +26,13 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class EmpresaForm : Window
     {
+        private readonly Action recargarTabla;
+
         private byte[] data;
-        public EmpresaForm()
+        public EmpresaForm(Action recargar)
         {
             InitializeComponent();
-            
+            recargarTabla = recargar;
         }
 
         //Subir logotipo
@@ -90,7 +92,7 @@ namespace Tickets_Bosquejos.Catálogos
                 }
                 MessageBox.Show("Empresa registrada con éxito.");
 
-                
+                recargarTabla?.Invoke();
                 this.Close();
                
 

@@ -23,11 +23,14 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class UsuarioForm : Window
     {
-        public UsuarioForm()
+        private readonly Action recargarTabla;
+        public UsuarioForm(Action recargar)
         {
             InitializeComponent();
 
             CargarCmbEmpresas();
+
+            recargarTabla = recargar;
         }
 
         //Cargar lista de empresas en el combobox
@@ -128,6 +131,8 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Usuario registrado con éxito.");
+
+                recargarTabla?.Invoke();
                 this.Close();
 
 

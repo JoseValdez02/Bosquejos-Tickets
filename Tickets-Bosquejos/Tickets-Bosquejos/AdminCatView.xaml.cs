@@ -187,25 +187,25 @@ namespace Tickets_Bosquejos
             if (activeUserControl is CatEmpresas empresasControl)
             {
 
-                EmpresaForm empresa = new EmpresaForm();
+                EmpresaForm empresa = new EmpresaForm(empresasControl.Recargar);
                 empresa.ShowDialog();
             }
             else if (activeUserControl is CatUsuarios usuariosControl)
             {
 
-               UsuarioForm usuario = new UsuarioForm();
+               UsuarioForm usuario = new UsuarioForm(usuariosControl.Recargar);
                usuario.ShowDialog();
             }
             else if (activeUserControl is CatSistemas sistemasControl)
             {
 
-               SistemaForm sistema = new SistemaForm();
+               SistemaForm sistema = new SistemaForm(sistemasControl.Recargar);
                sistema.ShowDialog();
             }
             else if (activeUserControl is CatProgramadores programadoresControl)
             {
 
-               ProgramadorForm programador = new ProgramadorForm();
+               ProgramadorForm programador = new ProgramadorForm(programadoresControl.Recargar);
                programador.ShowDialog();
             }
             else
