@@ -96,7 +96,7 @@ namespace Tickets_Bosquejos.Catálogos
 
                     MessageBox.Show("Empresa editada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
-                   
+                    
                 }
                 catch (Exception ex)
                 {

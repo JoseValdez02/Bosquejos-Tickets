@@ -25,76 +25,23 @@ namespace Tickets_Bosquejos
     {
         private UserControl activeUserControl;
 
-        public AdminCatView()
+        public AdminCatView(UserControl control)
         {
             InitializeComponent();
+            activeUserControl = control;
+            CatalogoContent.Content = activeUserControl;
+           
         }
 
-        //Abrir formularios para dar de alta usuarios, empresas, sistemas y programadores
-        private void Empresa_Click(object sender, RoutedEventArgs e)
-        {
-            var empresa = new EmpresaForm();
-            empresa.ShowDialog();
-        }
-
-        private void Usuario_Click(object sender, RoutedEventArgs e)
-        {
-            var usuario = new UsuarioForm();
-            usuario.ShowDialog();
-        }
-
-        private void Sistema_Click(object sender, RoutedEventArgs e)
-        {
-            var sistema = new SistemaForm();
-            sistema.ShowDialog();
-        }
-
-        private void Programador_Click(object sender, RoutedEventArgs e)
-        {
-            var programador = new ProgramadorForm();
-            programador.ShowDialog();
-        }
-
-        // Cargar catálogos en el ContentControl
-        private void CatEmprresas_Click(object sender, RoutedEventArgs e)
-        {
-            //Cargar los controles de usuario de los catalogos en el ContentControl
-            var empresasControl = new CatEmpresas();
-            CatalogoContent.Content = empresasControl;
-            activeUserControl = empresasControl;
-        }
-
-        private void CatUsuarios_Click(object sender, RoutedEventArgs e)
-        {
-            var usuariosControl = new CatUsuarios();
-            CatalogoContent.Content = usuariosControl;
-            activeUserControl = usuariosControl;
-        }
-
-        private void CatSistemas_Click(object sender, RoutedEventArgs e)
-        {
-            var sistemasControl = new CatSistemas();
-            CatalogoContent.Content = sistemasControl;
-            activeUserControl = sistemasControl;
-        }
-
-        private void CatProgramadores_Click(object sender, RoutedEventArgs e)
-        {
-            var programadoresControl = new CatProgramadores();
-            CatalogoContent.Content = programadoresControl;
-            activeUserControl = programadoresControl;
-        }
-
-      
         //Editar un registro de los catálogos
        private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
            if (activeUserControl is CatEmpresas empresasControl)
             {
-                // Obtener la empresa seleccionado
+                // Obtener el registro seleccionado
                 if (empresasControl.empresaSeleccionada is DataRowView empresaSelected)
                 {
-
+                    //Enviar datos de los registros al formulario correspondiente
                     EditEmpresa editEmpresaForm = new EditEmpresa(empresaSelected);
                     editEmpresaForm.ShowDialog();
                 }
@@ -158,27 +105,31 @@ namespace Tickets_Bosquejos
             {
 
                 empresasControl.EliminarEmpresa();
+                empresasControl.Recargar();
             }
             else if (activeUserControl is CatUsuarios usuariosControl)
             {
                 usuariosControl.EliminarUsuario();
+                usuariosControl.Recargar();
             }
             else if (activeUserControl is CatSistemas sistemasControl)
             {
                 sistemasControl.EliminarSistema();
+                sistemasControl.Recargar();
             }
             else if (activeUserControl is CatProgramadores programadoresControl)
             {
                 programadoresControl.EliminarProgramador();
+                programadoresControl.Recargar();
             }
             else
             {
-                MessageBox.Show("No hay un catálogo activo o se ha seleccionado un registro");
+                MessageBox.Show("No hay un catálogo activo o no se ha seleccionado un registro");
             }
         }
 
 
-        //Actualizar algún catálogo
+        //Actualizar algún catálogo activo
         private void btnActualizar_Click(object sender, RoutedEventArgs e)
         {
             if (activeUserControl is CatEmpresas empresasControl)
@@ -203,9 +154,64 @@ namespace Tickets_Bosquejos
             }
         }
 
+        //Buscar un registro de los catálogos
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-           
+           string criterio = txtSearchBar.Text.Trim();
+
+            if (activeUserControl is CatEmpresas empresasControl)
+            {
+                empresasControl.Buscar(criterio);
+            }
+            else if (activeUserControl is CatUsuarios usuariosControl)
+            {
+                usuariosControl.Buscar(criterio);
+            }
+            else if (activeUserControl is CatSistemas sistemasControl)
+            {
+                sistemasControl.Buscar(criterio);
+            }
+            else if (activeUserControl is CatProgramadores programadoresControl)
+            {
+                programadoresControl.Buscar(criterio);
+            }
+            else
+            {
+                MessageBox.Show("No hay un catálogo activo");    
+            }
+        }
+
+        //Añadir nuevo registro
+        private void btnNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            if (activeUserControl is CatEmpresas empresasControl)
+            {
+
+                EmpresaForm empresa = new EmpresaForm();
+                empresa.ShowDialog();
+            }
+            else if (activeUserControl is CatUsuarios usuariosControl)
+            {
+
+               UsuarioForm usuario = new UsuarioForm();
+               usuario.ShowDialog();
+            }
+            else if (activeUserControl is CatSistemas sistemasControl)
+            {
+
+               SistemaForm sistema = new SistemaForm();
+               sistema.ShowDialog();
+            }
+            else if (activeUserControl is CatProgramadores programadoresControl)
+            {
+
+               ProgramadorForm programador = new ProgramadorForm();
+               programador.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Ocurrio un error.");
+            }
         }
     }
 }

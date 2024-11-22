@@ -30,6 +30,7 @@ namespace Tickets_Bosquejos.Catálogos
         public EmpresaForm()
         {
             InitializeComponent();
+            
         }
 
         //Subir logotipo
@@ -64,6 +65,7 @@ namespace Tickets_Bosquejos.Catálogos
             }
 
             RegistrarEmpresa(empresa);
+           
         }
 
         //Metodo para registrar una empresa
@@ -87,7 +89,10 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Empresa registrada con éxito.");
+
+                
                 this.Close();
+               
 
 
             }

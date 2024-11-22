@@ -23,9 +23,14 @@
         </DockPanel>
 
         <DockPanel Grid.Row="1" LastChildFill="True">
-            <Menu Height="30" VerticalAlignment="Top" Background="#965a5a">
+            <Menu IsMainMenu="True" Height="30" VerticalAlignment="Top" Background="#965a5a">
                 <MenuItem Header="Administrar Tickets" FontWeight="Light" Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Click="MenuItem_Click" ></MenuItem>
-                <MenuItem Header="Catálogos" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Click="MenuItem_Click_1"></MenuItem>
+                <MenuItem Header="Catálogos" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" >
+                    <MenuItem x:Name="Empresa" Header="Empresas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Empresa_Click"></MenuItem>
+                    <MenuItem x:Name="Usuario" Header="Usuarios" FontWeight="Light" Foreground="Black" FontSize="14" Click="Usuario_Click"></MenuItem>
+                    <MenuItem x:Name="Sistema" Header="Sistemas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Sistema_Click"></MenuItem>
+                    <MenuItem x:Name="Programador" Header="Programadores" FontWeight="Light" Foreground="Black" FontSize="14" Click="Programador_Click"></MenuItem>
+                </MenuItem>
             </Menu>
         </DockPanel>
 

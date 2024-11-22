@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tickets_Bosquejos.Classes;
+using Tickets_Bosquejos.Catálogos;
+using System.Windows.Navigation;
 
 namespace Tickets_Bosquejos
 {
@@ -53,9 +55,32 @@ namespace Tickets_Bosquejos
             MainFrame.Navigate(new AdminTicketsView());
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+
+        private void Empresa_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new AdminCatView());
+            CargarCatalogo(new CatEmpresas());
+            
+        }
+
+        private void Usuario_Click(object sender, RoutedEventArgs e)
+        {
+            CargarCatalogo(new CatUsuarios());
+        }
+
+        private void Sistema_Click(object sender, RoutedEventArgs e)
+        {
+            CargarCatalogo(new CatSistemas());
+        }
+
+        private void Programador_Click(object sender, RoutedEventArgs e)
+        {
+            CargarCatalogo(new CatProgramadores());
+        }
+
+        private void CargarCatalogo(UserControl control)
+        {
+            AdminCatView adminCatView = new AdminCatView(control);
+            MainFrame.Navigate(adminCatView);
         }
     }
 }

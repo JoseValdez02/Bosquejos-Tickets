@@ -30,6 +30,7 @@ namespace Tickets_Bosquejos.Catálogos
             CargarProgramadores();
         }
 
+        // Cargar catálogo en el DataGrid
         public void CargarProgramadores()
         {
             using (MySqlConnection connection = Connection.GetConnection())
@@ -57,6 +58,13 @@ namespace Tickets_Bosquejos.Catálogos
             }
         }
 
+        // Recargar si se hace una modificación
+        public void Recargar()
+        {
+            CargarProgramadores();
+        }
+
+        // Eliminar un programador
         public void EliminarProgramador()
         {
             if (programadorSeleccionado != null)
@@ -87,6 +95,61 @@ namespace Tickets_Bosquejos.Catálogos
                             MessageBox.Show("Error al eliminar la empresa" + ex.Message);
                         }
                     }
+                }
+            }
+        }
+
+        // Buscar a un programador
+        public void Buscar(string criterio)
+        {
+            if (string.IsNullOrEmpty(criterio))
+            {
+                CargarProgramadores(); // Restaura todos los registros
+                return;
+            }
+
+            using (MySqlConnection connection = Connection.GetConnection())
+            {
+
+                try
+                {
+
+                    connection.Open();
+
+                    MySqlCommand cmd = new MySqlCommand("buscarcatprogramadores", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    if (int.TryParse(criterio, out int criterioInt))
+                    {
+                        cmd.Parameters.AddWithValue("p_criterio", criterioInt);
+                        cmd.Parameters.AddWithValue("p_criterioNombre", " ");
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("p_criterio", -1);
+                        cmd.Parameters.AddWithValue("p_criterioNombre", criterio);
+                    }
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        tableProgramadores.ItemsSource = dt.DefaultView;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron programadores con el criterio proporcionado");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Ocurrio un error: " + ex.Message);
+
                 }
             }
         }

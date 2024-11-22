@@ -31,6 +31,7 @@ namespace Tickets_Bosquejos.Catálogos
             CargarUsuarios();
         }
 
+        //Cargar el catálogo en el DataGrid
         public void CargarUsuarios()
         {
             using (MySqlConnection connection = Connection.GetConnection())
@@ -58,6 +59,13 @@ namespace Tickets_Bosquejos.Catálogos
             }
          }
 
+        //Recargar en caso de una modificación
+        public void Recargar()
+        {
+            CargarUsuarios();
+        }
+
+        //Eliminar un usuario
         public void EliminarUsuario()
         {
             if (usuarioSeleccionado != null)
@@ -88,6 +96,59 @@ namespace Tickets_Bosquejos.Catálogos
                             MessageBox.Show("Error al eliminar al usuario" + ex.Message);
                         }
                     }
+                }
+            }
+        }
+
+        //Buscar un usuario
+        public void Buscar(string criterio)
+        {
+            if (string.IsNullOrEmpty(criterio))
+            {
+                CargarUsuarios(); // Restaura todos los registros
+                return;
+            }
+
+            using (MySqlConnection connection = Connection.GetConnection())
+            {
+
+                try
+                {
+
+                    connection.Open();
+
+                    MySqlCommand cmd = new MySqlCommand("buscarcatusuarios", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    if (int.TryParse(criterio, out int criterioInt))
+                    {
+                        cmd.Parameters.AddWithValue("p_criterio", criterioInt);
+                        cmd.Parameters.AddWithValue("p_criterioNombre", " ");
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("p_criterio", -1);
+                        cmd.Parameters.AddWithValue("p_criterioNombre", criterio);
+                    }
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        tableUsuarios.ItemsSource = dt.DefaultView;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron usuarios con el criterio proporcionado");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Ocurrio un error: " + ex.Message);
+
                 }
             }
         }

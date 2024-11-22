@@ -14,7 +14,6 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
 
@@ -38,36 +37,19 @@ Margin="12,0,0,8"></TextBlock>
             </Button>
         </DockPanel>
 
-        <DockPanel Grid.Row="1" LastChildFill="True">
-            <Menu IsMainMenu="True" Height="30" VerticalAlignment="Top" Background="#f5f5e5">
-                <MenuItem Header="Registrar" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" >
-                    <MenuItem x:Name="Empresa" Header="Empresas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Empresa_Click"></MenuItem>
-                    <MenuItem x:Name="Usuario" Header="Usuarios" FontWeight="Light" Foreground="Black" FontSize="14" Click="Usuario_Click"></MenuItem>
-                    <MenuItem x:Name="Sistema" Header="Sistemas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Sistema_Click"></MenuItem>
-                    <MenuItem x:Name="Programador" Header="Programadores" FontWeight="Light" Foreground="Black" FontSize="14" Click="Programador_Click"></MenuItem>
-                </MenuItem>
-                <MenuItem x:Name="CatEmprresas" Header="Empresas" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" 
-                          Click="CatEmprresas_Click"></MenuItem>
-                <MenuItem x:Name="CatUsuarios" Header="Usuarios" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"
-                          Click="CatUsuarios_Click"></MenuItem>
-                <MenuItem x:Name="CatSistemas" Header="Sistemas" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"
-                          Click="CatSistemas_Click"></MenuItem>
-                <MenuItem x:Name="CatProgramadores" Header="Programadores" FontWeight="Light" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" 
-                          Click="CatProgramadores_Click"></MenuItem>
-            </Menu>
-        </DockPanel>
-
-        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+        <StackPanel Grid.Row="1" Margin="0,10,0,0">
             <ScrollViewer Height="440">
                 <ContentControl x:Name="CatalogoContent"></ContentControl>
             </ScrollViewer>
         </StackPanel>
 
-        <DockPanel Grid.Row="3" Height="90">
-            <Button x:Name="btnEditar" Content="Editar" Width="95" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="500,30,0,0" BorderThickness="1,1,1,1" Click="btnEditar_Click"></Button>
+        <DockPanel Grid.Row="2" Height="90">
+            <Button x:Name="btnNuevo" Content="Nuevo" Width="95" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="123,35,55,2" BorderThickness="1,1,1,1" Click="btnNuevo_Click"></Button>
+            <Button x:Name="btnEditar" Content="Editar" Width="95" Height="35"  HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="290,35,0,2" BorderThickness="1,1,1,1" Click="btnEditar_Click"></Button>
             <Button x:Name="btnEliminar" Content="Eliminar" Width="95" Height="35" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,30,500,0" BorderThickness="1,1,1,1" Click="btnEliminar_Click" ></Button>
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,35,132,2" BorderThickness="1,1,1,1" Click="btnEliminar_Click" ></Button>
         </DockPanel>
     </Grid>
 </Page>
