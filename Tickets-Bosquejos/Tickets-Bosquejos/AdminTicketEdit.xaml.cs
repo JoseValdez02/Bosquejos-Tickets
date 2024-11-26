@@ -120,7 +120,7 @@ namespace Tickets_Bosquejos
                     foreach (DataRow row in dt.Rows)
                     {
 
-                        cmbResponsable.Items.Add(row["pro_nombre"]);
+                        cmbResponsable.Items.Add(new KeyValuePair<int, string>((int)row["pro_clave"], row["pro_nombre"].ToString()));
 
                     }
                 }
@@ -136,6 +136,7 @@ namespace Tickets_Bosquejos
         private void btnAsignar_Click(object sender, RoutedEventArgs e)
         {
 
+            int? proClave = (cmbResponsable.SelectedValue as int?);
             string responsableSeleccionado = cmbResponsable.SelectedItem?.ToString();
           
 
@@ -161,9 +162,21 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
 
+                    MySqlCommand asiCmd = new MySqlCommand("asignacionessistemas");
+                    asiCmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    asiCmd.Parameters.AddWithValue("p_empClave", UserSession.empClave);
+                    asiCmd.Parameters.AddWithValue("v_sisClave", txtSistema.Text);
+                    asiCmd.Parameters.AddWithValue("p_proClave", proClave);
+                    asiCmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
+                    asiCmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
+                    asiCmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
+                    cmd.Parameters.AddWithValue("v_clave", tic_clave);
+                    cmd.ExecuteNonQuery();
+
+
                     MessageBox.Show("Se agrego al responsable exitosamente");
 
-                    MostrarNotificacion(responsableSeleccionado, txtIncidencia.Text, txtUsuario.Text, txtPrioridad.Text);
+                    NotificarAsignacion(responsableSeleccionado, txtIncidencia.Text, txtUsuario.Text, txtPrioridad.Text);
                     AdminTicketsView myAdminTicketsView = new AdminTicketsView();
                     NavigationService.Navigate(myAdminTicketsView);
                     myAdminTicketsView.RecargarTickets();
@@ -179,8 +192,8 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Notificar
-        private void MostrarNotificacion(string responsable, string incidencia, string usuario, string prioridad)
+        //Notificar asignación
+        private void NotificarAsignacion(string responsable, string incidencia, string usuario, string prioridad)
         {
 
             // Generar la notificación de Windows
@@ -269,6 +282,7 @@ namespace Tickets_Bosquejos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Se actualizó el ticket exitosamente");
+                    NotificarFecha(txtIncidencia.Text, txtFechaResolucion.SelectedDate);
                     AdminTicketsView myAdminTicketsView = new AdminTicketsView();
                     NavigationService.Navigate(myAdminTicketsView);
                     myAdminTicketsView.RecargarTickets();
@@ -282,6 +296,19 @@ namespace Tickets_Bosquejos
 
                 }
             }
+        }
+
+        //Notificar fecha de resolución
+        private void NotificarFecha(string incidencia, DateTime? fecha)
+        {
+
+            // Generar la notificación de Windows
+            new ToastContentBuilder()
+                .AddArgument("action", "viewTicket")
+                .AddArgument("ticketId", tic_clave)
+                .AddText($"Fecha estimada: {fecha}")
+                .AddText($"Su ticket #{tic_clave} tiene como fecha de resolución {fecha}")
+                .Show(); // Muestra la notificación
         }
     }
 }

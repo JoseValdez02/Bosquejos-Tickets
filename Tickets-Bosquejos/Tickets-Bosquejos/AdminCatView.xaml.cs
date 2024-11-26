@@ -42,7 +42,7 @@ namespace Tickets_Bosquejos
                 if (empresasControl.empresaSeleccionada is DataRowView empresaSelected)
                 {
                     //Enviar datos de los registros al formulario correspondiente
-                    EditEmpresa editEmpresaForm = new EditEmpresa(empresaSelected);
+                    EditEmpresa editEmpresaForm = new EditEmpresa(empresaSelected, empresasControl.Recargar);
                     editEmpresaForm.ShowDialog();
                 }
                 else
@@ -56,7 +56,7 @@ namespace Tickets_Bosquejos
                 if(usuariosControl.usuarioSeleccionado is DataRowView usuarioSelected)
                 {
 
-                    EditUsuario editUsuarioForm = new EditUsuario(usuarioSelected);
+                    EditUsuario editUsuarioForm = new EditUsuario(usuarioSelected, usuariosControl.Recargar);
                     editUsuarioForm.ShowDialog();
                 }
                 else
@@ -70,7 +70,7 @@ namespace Tickets_Bosquejos
                 if (sistemasControl.sistemaSeleccionado is DataRowView sistemaSelected)
                 {
 
-                    EditSistema editSistemaForm = new EditSistema(sistemaSelected);
+                    EditSistema editSistemaForm = new EditSistema(sistemaSelected, sistemasControl.Recargar);
                     editSistemaForm.ShowDialog();
                 }
                 else
@@ -84,7 +84,7 @@ namespace Tickets_Bosquejos
                 if (programadoresControl.programadorSeleccionado is DataRowView programadorSelected)
                 {
 
-                    EditProgramador editProgramadorForm = new EditProgramador(programadorSelected);
+                    EditProgramador editProgramadorForm = new EditProgramador(programadorSelected, programadoresControl.Recargar);
                     editProgramadorForm.ShowDialog();
                 }
                 else
@@ -181,7 +181,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Añadir nuevo registro
+        //Enviar a los formularios para añadir nuevo registro
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             if (activeUserControl is CatEmpresas empresasControl)

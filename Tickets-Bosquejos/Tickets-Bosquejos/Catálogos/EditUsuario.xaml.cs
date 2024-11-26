@@ -22,14 +22,15 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class EditUsuario : Window
     {
-
+        private readonly Action recargarTabla;
         public DataRowView UsuarioSelected { get; }
 
         private int usu_clave;
-        public EditUsuario(DataRowView usuarioSeleccionado)
+        public EditUsuario(DataRowView usuarioSeleccionado, Action recargar)
         {
             InitializeComponent();
             CargarCmbEmpresas();
+            recargarTabla = recargar;
 
             if (usuarioSeleccionado != null)
             {
@@ -54,6 +55,7 @@ namespace Tickets_Bosquejos.Catálogos
                 MessageBox.Show("No se pudo cargar el usuario seleccionada.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
             }
+
         }
 
         private void CargarCmbEmpresas()
@@ -129,7 +131,9 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Close();
+
+                    recargarTabla?.Invoke();
+                    this.Close();
                 }
                 catch (Exception ex)
                 {

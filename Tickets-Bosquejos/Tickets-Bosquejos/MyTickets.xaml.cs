@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,7 @@ namespace Tickets_Bosquejos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("El ticket ha sido eliminado exitosamente");
+                    NotificarEliminacion(ticClave, UserSession.usuNombre);
 
                 }
                 catch (Exception ex)
@@ -99,6 +101,20 @@ namespace Tickets_Bosquejos
                     MessageBox.Show("Error al eliminar el ticket" + ex.Message);
                 }
             }
+        }
+
+        //Notificar eliminación
+        private void NotificarEliminacion(int clave, string nombre)
+        {
+
+            // Generar la notificación de Windows
+            new ToastContentBuilder()
+                .AddArgument("action", "viewTicket")
+                .AddArgument("ticketId", clave)
+                .AddText($"Ticket eliminado")
+                .AddText($"El ticket #{clave} fue eliminado por el usuario {nombre}.\n" +
+                $"Ya no aparecerá en la tabla de tickets")
+                .Show(); // Muestra la notificación
         }
 
         //Placeholder para el combobox de filtrar por status y cargar el filtro de busqueda por status

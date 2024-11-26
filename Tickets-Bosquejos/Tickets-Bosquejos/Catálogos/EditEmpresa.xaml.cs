@@ -24,16 +24,20 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class EditEmpresa : Window
     {
-       
+
+        private readonly Action recargarTabla;
+
         private byte[] data;
 
         public DataRowView EmpresaSelected { get; }
 
         private int emp_clave;
 
-        public EditEmpresa(DataRowView empresaSeleccionada)
+        public EditEmpresa(DataRowView empresaSeleccionada, Action recargar)
         {
             InitializeComponent();
+
+            recargarTabla = recargar;
 
             if (empresaSeleccionada != null)
             {
@@ -55,6 +59,8 @@ namespace Tickets_Bosquejos.Catálogos
                 MessageBox.Show("No se pudo cargar la empresa seleccionada.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
             }
+
+            
         }
 
         private void btnEditLogo_Click(object sender, RoutedEventArgs e)
@@ -95,7 +101,9 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Empresa editada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Close();
+
+                    recargarTabla?.Invoke();
+                    this.Close();
                     
                 }
                 catch (Exception ex)

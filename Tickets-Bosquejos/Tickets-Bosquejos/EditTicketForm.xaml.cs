@@ -18,6 +18,7 @@ using System.IO;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using Tickets_Bosquejos.Classes;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Tickets_Bosquejos
 {
@@ -110,6 +111,7 @@ namespace Tickets_Bosquejos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Se actualizó el ticket exitosamente");
+                    NotificarActualizacion(txtIncidencia.Text);
                     MyTickets myTicketsPage = new MyTickets();
                     NavigationService.Navigate(myTicketsPage);
                     myTicketsPage.RecargarTickets();
@@ -123,6 +125,20 @@ namespace Tickets_Bosquejos
 
                 }
             }
+        }
+
+        //Notificar actualización del ticket
+        private void NotificarActualizacion(string incidencia)
+        {
+
+            // Generar la notificación de Windows
+            new ToastContentBuilder()
+                .AddArgument("action", "viewTicket")
+                .AddArgument("ticketId", tic_clave)
+                .AddText($"Actualización del ticket: {incidencia}")
+                .AddText($"El ticket #{tic_clave} ha sido actualizado con nueva información.\n" +
+                $"Revise en las observaciones o PDF")
+                .Show(); // Muestra la notificación
         }
     }
 }

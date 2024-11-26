@@ -22,12 +22,15 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class EditProgramador : Window
     {
+        private readonly Action recargarTabla;
         public DataRowView SistemaSelected { get; }
 
         private int pro_clave;
-        public EditProgramador(DataRowView programadorSeleccionado)
+        public EditProgramador(DataRowView programadorSeleccionado, Action recargar)
         {
             InitializeComponent();
+
+            recargarTabla = recargar;
 
             if (programadorSeleccionado != null)
             {
@@ -70,7 +73,9 @@ namespace Tickets_Bosquejos.Catálogos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Programador editado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Close();
+
+                    recargarTabla?.Invoke();
+                    this.Close();
                 }
                 catch (Exception ex)
                 {

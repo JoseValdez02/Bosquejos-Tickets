@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using MySqlX.XDevAPI.Relational;
@@ -195,6 +196,7 @@ namespace Tickets_Bosquejos
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Ticket enviado exitosamente.");
+                NotificarTicket(txtIncidencia.Text, UserSession.usuNombre, DateTime.Now);
                 TicketsForm ticketsFormPage = new TicketsForm();
                 NavigationService.Navigate(ticketsFormPage);
             }
@@ -202,6 +204,19 @@ namespace Tickets_Bosquejos
             {
                 MessageBox.Show("Ha ocurrido un error:" + ex.Message);
             }
+        }
+
+        //Notificar ticket creado
+        private void NotificarTicket( string incidencia, string usuario, DateTime fecha)
+        {
+
+            // Generar la notificación de Windows
+            new ToastContentBuilder()
+                .AddArgument("action", "viewTicket")
+                .AddText($"Nuevo ticket creado: {incidencia}")
+                .AddText($"Usuario: {usuario}")
+                .AddText($"Fecha de creación: {fecha}")
+                .Show(); // Muestra la notificación
         }
     }
 }

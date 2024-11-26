@@ -32,6 +32,7 @@ namespace Tickets_Bosquejos.Catálogos
         public EmpresaForm(Action recargar)
         {
             InitializeComponent();
+
             recargarTabla = recargar;
         }
 
