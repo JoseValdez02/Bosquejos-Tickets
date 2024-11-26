@@ -76,8 +76,8 @@ namespace Tickets_Bosquejos
 
                     MySqlCommand cmd = new MySqlCommand("cargartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
                     cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
+                    cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -118,7 +118,7 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("p_statusFiltro", filtrar);
                     cmd.Parameters.AddWithValue("p_prioridadFiltro", filtrar);
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -165,7 +165,7 @@ namespace Tickets_Bosquejos
                     MySqlCommand cmd = new MySqlCommand("buscartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
 
                     if (int.TryParse(criterio, out int criterioInt))
                     {
@@ -217,7 +217,7 @@ namespace Tickets_Bosquejos
                     MySqlCommand cmd = new MySqlCommand("cargartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);

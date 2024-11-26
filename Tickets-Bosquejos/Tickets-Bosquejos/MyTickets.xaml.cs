@@ -209,7 +209,7 @@ namespace Tickets_Bosquejos
 
                     MySqlCommand cmd = new MySqlCommand("buscartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
 
                     if (int.TryParse(criterio, out int criterioInt))
@@ -260,7 +260,7 @@ namespace Tickets_Bosquejos
 
                     MySqlCommand cmd = new MySqlCommand("cargartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -294,7 +294,7 @@ namespace Tickets_Bosquejos
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_statusFiltro", statusFiltro);
                     cmd.Parameters.AddWithValue("p_prioridadFiltro", DBNull.Value);
-                    cmd.Parameters.AddWithValue("p_usuario", UserSession.usuNombre);
+                    cmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
                     cmd.Parameters.AddWithValue("p_puesto", UserSession.usuPuesto);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();

@@ -156,7 +156,8 @@ namespace Tickets_Bosquejos
                     MySqlCommand cmd = new MySqlCommand("asignarresponsable", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_status", "Abierto");
-                    cmd.Parameters.AddWithValue("v_programador", responsableSeleccionado);
+                    cmd.Parameters.AddWithValue("v_proClave", proClave);
+                    cmd.Parameters.AddWithValue("v_proNombre", responsableSeleccionado);
                     cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
@@ -165,18 +166,18 @@ namespace Tickets_Bosquejos
                     MySqlCommand asiCmd = new MySqlCommand("asignacionessistemas");
                     asiCmd.CommandType = System.Data.CommandType.StoredProcedure;
                     asiCmd.Parameters.AddWithValue("p_empClave", UserSession.empClave);
-                    asiCmd.Parameters.AddWithValue("v_sisClave", txtSistema.Text);
+                    asiCmd.Parameters.AddWithValue("p_sisClave", txtSistema.Text);
                     asiCmd.Parameters.AddWithValue("p_proClave", proClave);
                     asiCmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
-                    asiCmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
-                    asiCmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
-                    cmd.Parameters.AddWithValue("v_clave", tic_clave);
-                    cmd.ExecuteNonQuery();
+                    asiCmd.Parameters.AddWithValue("p_usuIdentificacion", UserSession.usuNombre);
+                    asiCmd.Parameters.AddWithValue("p_usuFecha", DateTime.Now);
+
+                    asiCmd.ExecuteNonQuery();
 
 
                     MessageBox.Show("Se agrego al responsable exitosamente");
 
-                    NotificarAsignacion(responsableSeleccionado, txtIncidencia.Text, txtUsuario.Text, txtPrioridad.Text);
+                    NotificarAsignacion(responsableSeleccionado, txtIncidencia.Text,  txtPrioridad.Text);
                     AdminTicketsView myAdminTicketsView = new AdminTicketsView();
                     NavigationService.Navigate(myAdminTicketsView);
                     myAdminTicketsView.RecargarTickets();
@@ -193,7 +194,7 @@ namespace Tickets_Bosquejos
         }
 
         //Notificar asignación
-        private void NotificarAsignacion(string responsable, string incidencia, string usuario, string prioridad)
+        private void NotificarAsignacion(string responsable, string incidencia, string prioridad)
         {
 
             // Generar la notificación de Windows
@@ -202,7 +203,7 @@ namespace Tickets_Bosquejos
                 .AddArgument("ticketId", tic_clave)
                 .AddText($"Nuevo ticket asignado: {incidencia}")
                 .AddText($"Prioridad: {prioridad}")
-                .AddText($"El ticket #{tic_clave} ha sido asignado a {responsable}.\n" +
+                .AddText($"El ticket con ID: {tic_clave} ha sido asignado a {responsable}.\n" +
                 $"Atienda el ticket y asigne una fecha de resolución")
                 .Show(); // Muestra la notificación
         }

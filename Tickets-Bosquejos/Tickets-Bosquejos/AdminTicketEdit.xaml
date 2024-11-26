@@ -81,7 +81,7 @@
                     <TextBlock Text="Responsable actual:" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBlock>
                     <TextBox Name="txtResponsable" Height="25" Margin="0,5,0,15" FontSize="14" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True"></TextBox>
                     <ComboBox x:Name="cmbResponsable" Height="25" Margin="0,-12,0,15" FontSize="14" Width="260" HorizontalAlignment="Left" BorderBrush="#333" SelectionChanged="cmbResponsable_SelectionChanged"
-                              Loaded="cmbResponsable_Loaded">
+                              Loaded="cmbResponsable_Loaded" DisplayMemberPath="Value" SelectedValuePath="Key">
                         <ComboBoxItem Content="Selecciona a un responsable" IsEnabled="False"/>
                     </ComboBox>
                     <Button Name="btnAsignar" Content="Asignar" Width="150" Height="40" Background="#8B3F3C" Foreground="White"
