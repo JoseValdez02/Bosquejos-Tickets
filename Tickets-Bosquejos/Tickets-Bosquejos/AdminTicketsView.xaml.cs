@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -256,7 +257,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-        private void btnSolucionado_Click(object sender, RoutedEventArgs e)
+        private void btnResuelto_Click(object sender, RoutedEventArgs e)
         {
             if (tableTickets.SelectedItem is DataRowView ticketSeleccionado)
             {
@@ -304,6 +305,7 @@ namespace Tickets_Bosquejos
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Ticket resuelto");
+                    NotificarResuelto(ticClave, DateTime.Now);
 
                 }
                 catch (Exception ex)
@@ -311,6 +313,18 @@ namespace Tickets_Bosquejos
                     MessageBox.Show("Error al actualizar el ticket" + ex.Message);
                 }
             }
+        }
+
+        private void NotificarResuelto(int clave, DateTime fecha)
+        {
+            // Generar la notificación de Windows
+            new ToastContentBuilder()
+                .AddArgument("action", "viewTicket")
+                .AddArgument("ticketId", clave)
+                .AddText($"Ticket resuelto")
+                .AddText($"El ticket #{clave} ha sido resuelto.\n" +
+                $"Fecha de resolución: {fecha}")
+                .Show(); // Muestra la notificación
         }
 
         //Eliminar ticket

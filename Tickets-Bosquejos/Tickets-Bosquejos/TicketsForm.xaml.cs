@@ -36,10 +36,18 @@ namespace Tickets_Bosquejos
         {
             InitializeComponent();
 
+            CargarCmbPrioridad();
+
             CargarCmbSistemas();
         }
 
-      
+
+        //Cambiar titulo de la ventana por el de la pagina
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Title = "Crear Ticket";
+        }
+
         //Poner placeholder
         private void cmbPrioridad_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -62,10 +70,36 @@ namespace Tickets_Bosquejos
             cmbPrioridad.SelectedIndex = 0;
         }
 
-        //Cambiar titulo de la ventana por el de la pagina
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+
+        //Cargar combobox con la tabla de los sistemas
+        private void CargarCmbPrioridad()
         {
-            Window.GetWindow(this).Title = "Crear Ticket";
+
+            using (MySqlConnection connection = Connection.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+
+                    MySqlCommand cmd = new MySqlCommand("cargarcmbprioridad", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+
+                        cmbPrioridad.Items.Add(row["pri_nombre"].ToString());
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Error al cargar prioridades" + ex.Message);
+                }
+            }
         }
 
         //Placeholder para el combobox para seleccionar un sistema en el formulario 
@@ -151,7 +185,7 @@ namespace Tickets_Bosquejos
             string incidencia = txtIncidencia.Text;
             int? sisClave = (cmbSistema.SelectedValue as int?);
             string sistema = cmbSistema.SelectedItem?.ToString();
-            string prioridad = (cmbPrioridad.SelectedItem as ComboBoxItem).Content.ToString();
+            string prioridad = cmbPrioridad.SelectedItem?.ToString();
             string observaciones = txtObservaciones.Text;
             string correo = txtCorreo.Text;
 

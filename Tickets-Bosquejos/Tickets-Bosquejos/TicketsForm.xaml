@@ -39,11 +39,11 @@
                 <TextBlock Text="Qué tan urgente es su incidencia" FontSize="14" HorizontalAlignment="Left"></TextBlock>
                 <ComboBox x:Name="cmbPrioridad" SelectionChanged="cmbPrioridad_SelectionChanged" Loaded="cmbPrioridad_Loaded" Height="24"  Margin="0,10,0,20" FontSize="14" Width="286" 
                           HorizontalAlignment="Left" BorderBrush="Transparent" >
-                    <ComboBoxItem Content="Selecciona la prioridad" IsEnabled="False"></ComboBoxItem>
-                    <ComboBoxItem>Baja</ComboBoxItem>
-                    <ComboBoxItem>Media</ComboBoxItem>
-                    <ComboBoxItem>Alta</ComboBoxItem>
-                    <ComboBoxItem>Crítica</ComboBoxItem>
+                    <ComboBoxItem Content="Seleccione la prioridad" IsEnabled="False"></ComboBoxItem>
+                        <ComboBoxItem></ComboBoxItem>
+                        <ComboBoxItem></ComboBoxItem>
+                        <ComboBoxItem></ComboBoxItem>
+                        <ComboBoxItem></ComboBoxItem>
                 </ComboBox>
 
                 <!-- Observaciones-->

@@ -133,18 +133,13 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Asignar responsable
+        //Asignar responsable y registrar asignación
         private void btnAsignar_Click(object sender, RoutedEventArgs e)
         {
 
             int? proClave = (cmbResponsable.SelectedValue as int?);
             string responsableSeleccionado = cmbResponsable.SelectedItem?.ToString();
-
-            if (proClave == null)
-            {
-                MessageBox.Show("No se selecciono un programador válido");
-                return;
-            }
+          
 
             if (string.IsNullOrEmpty(responsableSeleccionado))
             {
@@ -152,52 +147,18 @@ namespace Tickets_Bosquejos
                 return;
             }
 
-            AsignacionesSistemas(proClave);
-            AsignarResponsable(proClave, responsableSeleccionado);
-
-        }
-
-        private void AsignacionesSistemas(int? proClave)
-        {
             using (MySqlConnection connection = Connection.GetConnection())
             {
+
+                //Clase para realizar transaccciones con MySql, se podrá realizar dos ejecuciones de procedimientos almacenados a la vez
+                MySqlTransaction tr = null;
+
                 try
                 {
 
                     connection.Open();
 
-                    MySqlCommand asiCmd = new MySqlCommand("asignacionessistemas");
-                    asiCmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    asiCmd.Parameters.AddWithValue("p_empClave", UserSession.empClave);
-                    asiCmd.Parameters.AddWithValue("p_proClave", proClave);
-                    asiCmd.Parameters.AddWithValue("p_usuClave", UserSession.usuClave);
-                    asiCmd.Parameters.AddWithValue("p_usuIdentificacion", UserSession.usuNombre);
-                    asiCmd.Parameters.AddWithValue("p_usuFecha", DateTime.Now);
-                    asiCmd.ExecuteNonQuery();
-
-
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("Error al cargar los tickets: " + ex.Message);
-
-                }
-                finally
-                {
-                    connection?.Close();
-                }
-            }
-        }
-
-        private void AsignarResponsable(int? proClave, string responsableSeleccionado) { 
-
-            using (MySqlConnection connection = Connection.GetConnection())
-            {
-                try
-                {
-
-                    connection.Open();
+                    tr = connection.BeginTransaction();
 
                     MySqlCommand cmd = new MySqlCommand("asignarresponsable", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -208,6 +169,18 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
                     cmd.ExecuteNonQuery();
+                    
+                    MySqlCommand asiCmd = new MySqlCommand("asignacionessistemas", connection);
+                    asiCmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    asiCmd.Parameters.AddWithValue("v_empClave", UserSession.empClave);
+                    asiCmd.Parameters.AddWithValue("v_proClave", proClave);
+                    asiCmd.Parameters.AddWithValue("v_usuClave", UserSession.usuClave);
+                    asiCmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
+                    asiCmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
+
+                    asiCmd.ExecuteNonQuery();
+
+                    tr.Commit();
 
                     MessageBox.Show("Se agrego al responsable exitosamente");
 
@@ -221,15 +194,14 @@ namespace Tickets_Bosquejos
                 catch (Exception ex)
                 {
 
+                    tr?.Rollback();
                     MessageBox.Show("Error al cargar los tickets: " + ex.Message);
 
                 }
             }
         }
 
-      
-
-        //Notificar asignación al responsable
+        //Notificar asignación
         private void NotificarAsignacion(string responsable, string incidencia, string prioridad)
         {
 
@@ -295,7 +267,6 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Asignar fecha de resolución
         private void btnAgregarFecha_Click(object sender, RoutedEventArgs e)
         {
            

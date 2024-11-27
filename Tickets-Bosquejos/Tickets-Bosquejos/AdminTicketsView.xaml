@@ -4,10 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tickets_Bosquejos"
+      xmlns:classes="clr-namespace:Tickets_Bosquejos.Classes"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1280"
       Title="Administrar Tickets"
       Loaded="Page_Loaded">
+
+    <!--Elemento personalizado para cargar un check si hay un pdf en el ticket o cross si no hay-->
+    <Page.Resources>
+        <classes:Converter x:Key="Converter" />
+    </Page.Resources>
 
     <Grid Background="#f5f5e5">
 
@@ -66,7 +72,14 @@ Margin="12,0,0,8"></TextBlock>
                         <DataGridTextColumn Header="Status" Binding="{Binding tic_status}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Prioridad" Binding="{Binding tic_prioridad}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Observaciones" Binding="{Binding tic_observaciones}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="PDF" Binding="{Binding tic_pdf}"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="PDF">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="20" Height="20" 
+             Source="{Binding tic_pdf, Converter={StaticResource Converter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Correo" Binding="{Binding tic_correo}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Responsable" Binding="{Binding pro_nombre}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Fecha de creación" Binding="{Binding tic_fechacreacion}"></DataGridTextColumn>
@@ -79,8 +92,8 @@ Margin="12,0,0,8"></TextBlock>
         <DockPanel Grid.Row="2" Height="70">
             <Button x:Name="btnAgregarResponsable" Content="Agregar Responsable/Asignar Fecha" Width="230" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
 FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="123,35,55,2" BorderThickness="1,1,1,1" Click="btnAgregarResponsable_Click"></Button>
-            <Button x:Name="btnSolucionado" Content="Marcar como resuelto" Width="161" Height="35" HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
-FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="225,35,0,2" BorderThickness="1,1,1,1" Click="btnSolucionado_Click"></Button>
+            <Button x:Name="btnResuelto" Content="Marcar como resuelto" Width="161" Height="35" HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="225,35,0,2" BorderThickness="1,1,1,1" Click="btnResuelto_Click"></Button>
             <Button x:Name="btnEliminar" Content="Eliminar Ticket" Width="95" Height="35" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
 FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,35,132,2" BorderThickness="1,1,1,1" Click="btnEliminar_Click"></Button>
         </DockPanel>

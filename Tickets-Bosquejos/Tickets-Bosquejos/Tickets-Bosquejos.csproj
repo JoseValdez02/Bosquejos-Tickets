@@ -110,6 +110,7 @@
       <DependentUpon>UsuarioForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Connection.cs" />
+    <Compile Include="Classes\Converter.cs" />
     <Compile Include="EditTicketForm.xaml.cs">
       <DependentUpon>EditTicketForm.xaml</DependentUpon>
     </Compile>
@@ -268,6 +269,10 @@
     <PackageReference Include="MySql.Data">
       <Version>9.1.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\check.png" />
+    <Resource Include="Images\close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

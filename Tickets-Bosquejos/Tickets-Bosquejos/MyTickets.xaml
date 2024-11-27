@@ -4,11 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tickets_Bosquejos"
+      xmlns:classes="clr-namespace:Tickets_Bosquejos.Classes"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1280"
       Loaded="Page_Loaded"
       Title="Mis Tickets">
 
+    <!--Elemento personalizado para cargar un check si hay un pdf en el ticket o cross si no hay-->
+    <Page.Resources>
+        <classes:Converter x:Key="Converter" />
+    </Page.Resources>
+    
     <Grid Background="#f5f5eb">
 
         <Grid.RowDefinitions>
@@ -57,7 +63,14 @@
                         <DataGridTextColumn Header="Status" Binding="{Binding tic_status}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Prioridad" Binding="{Binding tic_prioridad}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Observaciones" Binding="{Binding tic_observaciones}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="PDF" Binding="{Binding tic_pdf}"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="PDF">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="20" Height="20" 
+                                     Source="{Binding tic_pdf, Converter={StaticResource Converter}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Correo" Binding="{Binding tic_correo}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Responsable" Binding="{Binding pro_nombre}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Fecha de creación" Binding="{Binding tic_fechacreacion}"></DataGridTextColumn>
