@@ -1,0 +1,55 @@
+﻿<Page x:Class="Tickets_Bosquejos.AdminCatView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tickets_Bosquejos"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1280"
+      Title="AdminCatView">
+
+    <Grid x:Name="GridPrincipal" Background="#f5f5e5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <DockPanel Grid.Row="0" Height="58" VerticalAlignment="Center" >
+
+            <TextBlock Text="Catálogos" Width="95" Height="27" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" DockPanel.Dock="Left" 
+Margin="12,0,0,8"></TextBlock>
+
+            <!--Searchbar-->
+            <Button x:Name="btnBuscar" Width="20" Height="22" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,16,6" BorderThickness="1,1,1,1" BorderBrush="#333" 
+                    Click="btnBuscar_Click">
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\search.png" Height="25"></Image>
+            </Button>
+
+            <TextBox x:Name="txtSearchBar" Height="22" Width="250" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,0,6" BorderThickness="2,2,2,2" BorderBrush="#333" ></TextBox>
+
+            <!--Boton para actualizar-->
+            <Button x:Name="btnActualizar" Width="20" Height="22" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,16,6" BorderThickness="1,1,1,1" BorderBrush="#333"
+                    Click="btnActualizar_Click">
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\update.png" Height="25"></Image>
+            </Button>
+        </DockPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,10,0,0">
+            <ScrollViewer Height="440">
+                <ContentControl x:Name="CatalogoContent"></ContentControl>
+            </ScrollViewer>
+        </StackPanel>
+
+        <DockPanel Grid.Row="2" Height="90">
+            <Button x:Name="btnNuevo" Content="Nuevo" Width="95" Height="35" HorizontalAlignment="Left" Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="123,35,55,2" BorderThickness="1,1,1,1" Click="btnNuevo_Click"></Button>
+            <Button x:Name="btnEditar" Content="Editar" Width="95" Height="35"  HorizontalAlignment="Center"  Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="290,35,0,2" BorderThickness="1,1,1,1" Click="btnEditar_Click"></Button>
+            <Button x:Name="btnEliminar" Content="Eliminar" Width="95" Height="35" HorizontalAlignment="Right"  Background="#8B3F3C" Foreground="White"
+FontSize="12" FontWeight="Bold" BorderBrush="Transparent" Margin="0,35,132,2" BorderThickness="1,1,1,1" Click="btnEliminar_Click" ></Button>
+        </DockPanel>
+    </Grid>
+</Page>

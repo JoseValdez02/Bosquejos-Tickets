@@ -1,0 +1,40 @@
+﻿<Window x:Class="Tickets_Bosquejos.AdminView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tickets_Bosquejos"
+        mc:Ignorable="d"
+        Title="Menú" Height="900" Width="1366"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel x:Name="PanelSuperior" Grid.Row="0" Background="#8B3F3C" Opacity="0.9" LastChildFill="True">
+            <TextBlock x:Name="txtBienvenida" Text=" " TextWrapping="Wrap" Width="250" Height="35" FontSize="14" FontWeight="Bold" Foreground="white" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+            <Button x:Name="btnLogout" Width="30" Height="30" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,10,9,10" BorderBrush="Transparent" Click="btnLogout_Click">
+                <Image Source="C:\Users\SISTEMAS\source\repos\Tickets-Bosquejos\Tickets-Bosquejos\Images\logout.png" Height="25"></Image>
+            </Button>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <Menu x:Name="Menu" IsMainMenu="True" Height="30" VerticalAlignment="Top" Background="#965a5a">
+                <MenuItem Header="Administrar Tickets" FontWeight="Light" Foreground="white" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Click="MenuItem_Click" ></MenuItem>
+                <MenuItem Header="Catálogos" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" >
+                    <MenuItem x:Name="Empresa" Header="Empresas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Empresa_Click"></MenuItem>
+                    <MenuItem x:Name="Usuario" Header="Usuarios" FontWeight="Light" Foreground="Black" FontSize="14" Click="Usuario_Click"></MenuItem>
+                    <MenuItem x:Name="Sistema" Header="Sistemas" FontWeight="Light" Foreground="Black" FontSize="14" Click="Sistema_Click"></MenuItem>
+                    <MenuItem x:Name="Programador" Header="Programadores" FontWeight="Light" Foreground="Black" FontSize="14" Click="Programador_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <Frame Grid.Row="2" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#f5f5eb" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Frame>
+
+    </Grid>
+</Window>

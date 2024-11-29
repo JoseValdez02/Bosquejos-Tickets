@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Tickets_Bosquejos.Catálogos.CatUsuarios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tickets_Bosquejos.Catálogos"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid x:Name="tableUsuarios" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="600" Width="1050" FontSize="18"
+           IsReadOnly="True" ScrollViewer.CanContentScroll="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding usu_clave}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id de la Empresa" Binding="{Binding emp_clave}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nombre del Usuario" Binding="{Binding usu_nombre}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Área" Binding="{Binding usu_area}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Puesto" Binding="{Binding usu_puesto}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Correo" Binding="{Binding usu_correo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Contraseña" Binding="{Binding usu_password}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

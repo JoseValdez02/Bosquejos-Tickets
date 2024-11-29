@@ -1,0 +1,35 @@
+﻿<Window x:Class="Tickets_Bosquejos.Catálogos.EditEmpresa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tickets_Bosquejos.Catálogos"
+        mc:Ignorable="d"
+        Title="Editar Empresa" Height="550" Width="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid x:Name="GridPrincipal" Background="#f5f5e5">
+
+        <Border x:Name="BorderForm" BorderThickness="1" BorderBrush="#8B3F3C" Margin="30,10,30,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" Height="420" Width="380" VerticalAlignment="Center" Margin="0,10,0,0">
+                <TextBlock Text="Empresa" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="#333" Margin="0,8,0,10" />
+                <TextBlock Text="Editar información de la empresa" FontSize="12" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,15"/>
+
+                <TextBlock Text="Nombre" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="10,0,0,0"/>
+                <TextBox Name="txtEmpresa" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" ></TextBox>
+
+
+                <TextBlock Text="Logotipo" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="10,0,0,0"/>
+                <TextBox Name="txtLogo" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True"></TextBox>
+                <Button x:Name="btnEditLogo" Content="Cambiar logotipo" Width="110" Height="24" Margin="10,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent"
+                        Click="btnEditLogo_Click"></Button>
+
+                <Button x:Name="btnDescargarLogo" Content="Descargar logotipo" Width="110" Height="24" Margin="10,0,0,35" HorizontalAlignment="Left" BorderBrush="Transparent"
+         Click="btnDescargarLogo_Click"></Button>
+                
+                <Button Name="btnEditEmpresa" Content="Editar" Width="130" Height="30" Background="#8B3F3C" Foreground="White"
+FontSize="14" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,10" HorizontalAlignment="Center" Click="btnEditEmpresa_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
