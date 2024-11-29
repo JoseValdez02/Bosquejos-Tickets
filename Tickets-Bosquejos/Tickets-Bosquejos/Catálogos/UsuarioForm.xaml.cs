@@ -43,7 +43,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("cargarcmbempresas", connection);
+                    MySqlCommand cmd = new MySqlCommand("cargarcmbcatempresas", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -116,7 +116,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("registrarusuario", connection);
+                    MySqlCommand cmd = new MySqlCommand("registrarcatusuarios", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
 

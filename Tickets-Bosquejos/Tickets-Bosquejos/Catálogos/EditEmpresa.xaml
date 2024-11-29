@@ -21,9 +21,12 @@
 
                 <TextBlock Text="Logotipo" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="10,0,0,0"/>
                 <TextBox Name="txtLogo" Height="25" Margin="10,5,0,15" FontSize="12" Width="260" HorizontalAlignment="Left" BorderBrush="#333" IsReadOnly="True"></TextBox>
-                <Button x:Name="btnEditLogo" Content="Cambiar logotipo" Width="98" Height="24" Margin="10,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent"
+                <Button x:Name="btnEditLogo" Content="Cambiar logotipo" Width="110" Height="24" Margin="10,10,0,20" HorizontalAlignment="Left" BorderBrush="Transparent"
                         Click="btnEditLogo_Click"></Button>
 
+                <Button x:Name="btnDescargarLogo" Content="Descargar logotipo" Width="110" Height="24" Margin="10,0,0,35" HorizontalAlignment="Left" BorderBrush="Transparent"
+         Click="btnDescargarLogo_Click"></Button>
+                
                 <Button Name="btnEditEmpresa" Content="Editar" Width="130" Height="30" Background="#8B3F3C" Foreground="White"
 FontSize="14" FontWeight="Bold" BorderBrush="Transparent" Margin="0,20,0,10" HorizontalAlignment="Center" Click="btnEditEmpresa_Click"/>
             </StackPanel>

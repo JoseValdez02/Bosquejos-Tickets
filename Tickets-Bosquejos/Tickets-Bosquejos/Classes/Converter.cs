@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace Tickets_Bosquejos.Classes
             // Verifica si el valor es un arreglo de bytes (indicativo de que hay un PDF)
             if (value != null && value is byte[])
             {
-                // Imagen en caso de que el ticket si contenga un pdf
+                // Check en caso de que el registro si se tenga un archivo adjunto
                 return new BitmapImage(new Uri("C:\\Users\\SISTEMAS\\source\\repos\\Tickets-Bosquejos\\Tickets-Bosquejos\\Images\\check.png"));
+ 
             }
             else
             {
-                // Imagen en caso de que el ticket no contenga un pdf
+                // Cross en caso de que el registro no tenga un archivo adjunto
                 return new BitmapImage(new Uri("C:\\Users\\SISTEMAS\\source\\repos\\Tickets-Bosquejos\\Tickets-Bosquejos\\Images\\close.png"));
             }
         }

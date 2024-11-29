@@ -112,7 +112,7 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("cargarcmbprogramadores", connection);
+                    MySqlCommand cmd = new MySqlCommand("cargarcmbcatprogramadores", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -160,7 +160,7 @@ namespace Tickets_Bosquejos
 
                     tr = connection.BeginTransaction();
 
-                    MySqlCommand cmd = new MySqlCommand("asignarresponsable", connection);
+                    MySqlCommand cmd = new MySqlCommand("asignarresponsabletickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_status", "Abierto");
                     cmd.Parameters.AddWithValue("v_proClave", proClave);
@@ -226,14 +226,16 @@ namespace Tickets_Bosquejos
                     connection.Open();
 
                     // Obtener pdf por la clave del ticket
-                    MySqlCommand cmd = new MySqlCommand("descargarpdf", connection);
+                    MySqlCommand cmd = new MySqlCommand("descargarpdftickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
 
-                    byte[] pdfData = (byte[])cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar();
 
-                    if (pdfData != null)
+                    if (result != DBNull.Value && result != null)
                     {
+                        byte[] Pdfdata = (byte[])result;
+
                         SaveFileDialog dialog = new SaveFileDialog();
 
                         dialog.Filter = "PDF Files (*.pdf)|*.pdf";
@@ -246,7 +248,7 @@ namespace Tickets_Bosquejos
                             string filePath = dialog.FileName;
 
                             //Guardar archivo en la ruta a seleccionar
-                            File.WriteAllBytes(filePath, pdfData);
+                            File.WriteAllBytes(filePath, Pdfdata);
 
 
                             MessageBox.Show("Se guardó el archivo PDF correctamente");
@@ -255,7 +257,7 @@ namespace Tickets_Bosquejos
                             System.Diagnostics.Process.Start(filePath);
                         }
                     }
-                    else
+                    else 
                     {
                         MessageBox.Show("No se encontró ningún archivo PDF adjunto para este ticket.");
                     }
@@ -267,6 +269,7 @@ namespace Tickets_Bosquejos
             }
         }
 
+        //Agregar fecha de resolución
         private void btnAgregarFecha_Click(object sender, RoutedEventArgs e)
         {
            
@@ -281,7 +284,7 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("asignarfecharesolucion", connection);
+                    MySqlCommand cmd = new MySqlCommand("asignarfecharesoluciontickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_status", "Abierto");
                     cmd.Parameters.AddWithValue("v_fechaFin", fechaResolucion);

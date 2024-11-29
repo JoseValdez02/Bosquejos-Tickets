@@ -54,6 +54,7 @@ namespace Tickets_Bosquejos
                             UserSession.empClave = Convert.ToInt32(reader["emp_clave"]);
                             UserSession.usuNombre = reader["usu_nombre"].ToString();
                             UserSession.empNombre = reader["emp_nombre"].ToString();
+                            UserSession.empEstilo = reader["emp_estilo"].ToString();
                             UserSession.usuClave = Convert.ToInt32(reader["usu_clave"]);
 
                             reader.Close();

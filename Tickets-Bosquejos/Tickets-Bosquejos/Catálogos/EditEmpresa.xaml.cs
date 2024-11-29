@@ -91,13 +91,22 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("editarempresa", connection);
+                    MySqlCommand cmd = new MySqlCommand("editarcatempresas", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_empNombre", txtEmpresa.Text);
-                    cmd.Parameters.AddWithValue("v_logo", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", emp_clave);
+
+                    if (data == null || data.Length == 0)
+                    {
+                        cmd.Parameters.AddWithValue("v_logo", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("v_logo", data);
+                    }
+
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Empresa editada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -109,6 +118,57 @@ namespace Tickets_Bosquejos.Catálogos
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al editar la empresa: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void btnDescargarLogo_Click(object sender, RoutedEventArgs e)
+        {
+            using (MySqlConnection connection = Connection.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Obtener pdf por la clave del ticket
+                    MySqlCommand cmd = new MySqlCommand("descargarlogocatempresas", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("v_clave", emp_clave);
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != DBNull.Value && result != null)
+                    {
+                        byte[] Logodata = (byte[])result;
+
+                        SaveFileDialog dialog = new SaveFileDialog();
+
+                        dialog.Filter = "png Files (*.png)|*.png";
+                        dialog.Title = "Guardar el logotipo actual de la empresa en el equipo";
+                        dialog.FileName = "logotipo.png";
+
+                        if (dialog.ShowDialog() == true)
+                        {
+
+                            string filePath = dialog.FileName;
+
+                            //Guardar archivo en la ruta a seleccionar
+                            File.WriteAllBytes(filePath, Logodata);
+
+
+                            MessageBox.Show("Se guardó el logotipo correctamente");
+
+                           
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún logotipo adjunto a esta empresa.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al descargar el logotipo: " + ex.Message);
                 }
             }
         }

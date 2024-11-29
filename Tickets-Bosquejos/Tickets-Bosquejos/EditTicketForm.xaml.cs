@@ -101,13 +101,23 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("editarticket", connection);
+                    MySqlCommand cmd = new MySqlCommand("editartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_observaciones", txtObservaciones.Text);
-                    cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_clave", tic_clave);
+
+                    if (data == null || data.Length == 0)
+                    {
+                        //Valor nulo en caso de añadirse un pdf al ticket
+                        cmd.Parameters.AddWithValue("v_pdf", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("v_pdf", data);
+                    }
+
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Se actualizó el ticket exitosamente");

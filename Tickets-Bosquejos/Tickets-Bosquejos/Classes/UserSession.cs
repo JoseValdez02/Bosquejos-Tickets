@@ -13,6 +13,7 @@ namespace Tickets_Bosquejos.Classes
         public static string usuNombre { get; set; }
         public static string usuPuesto { get; set; }
         public static string empNombre { get; set; }
+        public static string empEstilo { get; set; }
 
         public static void Logout()
         {
@@ -21,6 +22,7 @@ namespace Tickets_Bosquejos.Classes
             usuNombre = null;
             usuPuesto = null;
             empNombre = null;
+            empEstilo = null;
         }
     }
 }

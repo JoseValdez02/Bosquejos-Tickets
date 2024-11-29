@@ -65,7 +65,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("editarsistema", connection);
+                    MySqlCommand cmd = new MySqlCommand("editarsistemas", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_sisNombre", txtSistema.Text);
                     cmd.Parameters.AddWithValue("v_lenguaje", txtLenguaje.Text);

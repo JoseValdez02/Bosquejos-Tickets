@@ -26,6 +26,7 @@ namespace Tickets_Bosquejos.Catálogos
     /// </summary>
     public partial class EmpresaForm : Window
     {
+        //Delegado para recargar la tabla al dar de alta
         private readonly Action recargarTabla;
 
         private byte[] data;
@@ -81,14 +82,24 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("registrarempresa", connection);
+                    MySqlCommand cmd = new MySqlCommand("registrarcatempresas", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
 
                     cmd.Parameters.AddWithValue("v_empNombre", empresa);
-                    cmd.Parameters.AddWithValue("v_logotipo", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
+
+                    if (data == null || data.Length == 0)
+                    {
+                        //Valor nulo en caso de no añadirse un logotipo
+                        cmd.Parameters.AddWithValue("v_logo", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("v_logo", data);
+                    }
+
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Empresa registrada con éxito.");

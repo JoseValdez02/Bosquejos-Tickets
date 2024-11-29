@@ -82,7 +82,7 @@ namespace Tickets_Bosquejos.Catálogos
                         {
                             connection.Open();
 
-                            MySqlCommand cmd = new MySqlCommand("eliminarprogramador", connection);
+                            MySqlCommand cmd = new MySqlCommand("eliminarcatprogramadores", connection);
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("v_clave", proClave);
                             cmd.ExecuteNonQuery();

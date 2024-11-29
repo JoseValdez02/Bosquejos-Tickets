@@ -66,7 +66,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("cargarcmbempresas", connection);
+                    MySqlCommand cmd = new MySqlCommand("cargarcmbcatempresas", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -117,7 +117,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("editarusuario", connection);
+                    MySqlCommand cmd = new MySqlCommand("editarcatusuarios", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_usuNombre", txtUsuario.Text);
                     cmd.Parameters.AddWithValue("v_empClave", empClave);

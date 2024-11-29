@@ -87,7 +87,7 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("eliminarticket", connection);
+                    MySqlCommand cmd = new MySqlCommand("eliminartickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_clave", ticClave);
                     cmd.ExecuteNonQuery();
@@ -290,7 +290,7 @@ namespace Tickets_Bosquejos
 
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("filtrarbusqueda", connection);
+                    MySqlCommand cmd = new MySqlCommand("filtrarbusquedatickets", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("p_statusFiltro", statusFiltro);
                     cmd.Parameters.AddWithValue("p_prioridadFiltro", DBNull.Value);

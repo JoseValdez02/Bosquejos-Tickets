@@ -63,7 +63,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("editarprogramador", connection);
+                    MySqlCommand cmd = new MySqlCommand("editarcatprogramadores", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("v_proNombre", txtProgramador.Text);
                     cmd.Parameters.AddWithValue("v_correo", txtCorreo.Text);

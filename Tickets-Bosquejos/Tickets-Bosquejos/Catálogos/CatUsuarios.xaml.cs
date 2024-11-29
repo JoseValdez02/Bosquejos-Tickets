@@ -83,7 +83,7 @@ namespace Tickets_Bosquejos.Catálogos
                         {
                             connection.Open();
 
-                            MySqlCommand cmd = new MySqlCommand("eliminarusuario", connection);
+                            MySqlCommand cmd = new MySqlCommand("eliminarcatusuarios", connection);
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("v_clave", usuClave);
                             cmd.ExecuteNonQuery();

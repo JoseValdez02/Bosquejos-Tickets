@@ -59,11 +59,7 @@ namespace Tickets_Bosquejos.Catálogos
             }
         }
 
-       /* public void RecargarTablas()
-        {
-            CargarEmpresas();
-        }*/
-
+     
         //Recargar automaticamente cuando se haga una modificación
         public void Recargar()
         {
@@ -88,7 +84,7 @@ namespace Tickets_Bosquejos.Catálogos
                         {
                             connection.Open();
 
-                            MySqlCommand cmd = new MySqlCommand("eliminarempresa", connection);
+                            MySqlCommand cmd = new MySqlCommand("eliminarcatempresas", connection);
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("v_clave", empClave);
                             cmd.ExecuteNonQuery();

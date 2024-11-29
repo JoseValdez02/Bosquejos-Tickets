@@ -56,7 +56,7 @@ namespace Tickets_Bosquejos.Catálogos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("registrarsistema", connection);
+                    MySqlCommand cmd = new MySqlCommand("registrarsistemas", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
 

@@ -209,7 +209,7 @@ namespace Tickets_Bosquejos
                 {
                     connection.Open();
 
-                    MySqlCommand cmd = new MySqlCommand("enviarticket", connection);
+                    MySqlCommand cmd = new MySqlCommand("enviartickets", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("v_empClave", UserSession.empClave);
@@ -222,11 +222,21 @@ namespace Tickets_Bosquejos
                     cmd.Parameters.AddWithValue("v_status", "Nuevo");
                     cmd.Parameters.AddWithValue("v_prioridad", prioridad);
                     cmd.Parameters.AddWithValue("v_observaciones", observaciones);
-                    cmd.Parameters.AddWithValue("v_pdf", data ?? new byte[0]);
                     cmd.Parameters.AddWithValue("v_correo", correo);
                     cmd.Parameters.AddWithValue("v_fechacreacion", DateTime.Now);
                     cmd.Parameters.AddWithValue("v_usuIdentificacion", UserSession.usuNombre);
                     cmd.Parameters.AddWithValue("v_usuFecha", DateTime.Now);
+
+                    if (data == null || data.Length == 0)
+                    {
+                        //Valor nulo en que caso de añadirse un pdf al tickets
+                        cmd.Parameters.AddWithValue("v_pdf", DBNull.Value);
+                    }
+                    else 
+                    {
+                        cmd.Parameters.AddWithValue("v_pdf", data);
+                    }
+
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Ticket enviado exitosamente.");

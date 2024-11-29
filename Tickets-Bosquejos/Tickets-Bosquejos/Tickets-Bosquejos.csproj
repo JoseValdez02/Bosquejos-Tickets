@@ -117,6 +117,11 @@
     <Compile Include="MyTickets.xaml.cs">
       <DependentUpon>MyTickets.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Styles\AdminStyles.cs" />
+    <Compile Include="Styles\AdminTicketEditStyles.cs" />
+    <Compile Include="Styles\AdminTicketsStyles.cs" />
+    <Compile Include="Styles\UserTicketsFormStyles.cs" />
+    <Compile Include="Styles\UserTicketsStyles.cs" />
     <Compile Include="TicketsForm.xaml.cs">
       <DependentUpon>TicketsForm.xaml</DependentUpon>
     </Compile>

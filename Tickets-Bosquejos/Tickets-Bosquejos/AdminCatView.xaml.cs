@@ -23,6 +23,7 @@ namespace Tickets_Bosquejos
     /// </summary>
     public partial class AdminCatView : Page
     {
+        //UserControl con el catálogo activo
         private UserControl activeUserControl;
 
         public AdminCatView(UserControl control)
@@ -41,7 +42,7 @@ namespace Tickets_Bosquejos
                 // Obtener el registro seleccionado
                 if (empresasControl.empresaSeleccionada is DataRowView empresaSelected)
                 {
-                    //Enviar datos de los registros al formulario correspondiente
+                    //Enviar datos de los registros al formulario correspondiente, y llamada del metodo recargar 
                     EditEmpresa editEmpresaForm = new EditEmpresa(empresaSelected, empresasControl.Recargar);
                     editEmpresaForm.ShowDialog();
                 }
@@ -181,7 +182,7 @@ namespace Tickets_Bosquejos
             }
         }
 
-        //Enviar a los formularios para añadir nuevo registro
+        //Enviar al formulario para añadir un nuevo registro en los catálogos
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             if (activeUserControl is CatEmpresas empresasControl)
